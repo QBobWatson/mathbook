@@ -501,6 +501,7 @@
       <xs:group ref="Axiom"/>
       <xs:group ref="Example"/>
       <xs:element ref="exercise"/>
+      <xs:element ref="exercises"/>
       <xs:element ref="list"/>
       <xs:group ref="Project"/>
       <xs:element ref="poem"/>

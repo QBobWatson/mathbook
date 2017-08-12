@@ -2,11 +2,11 @@
         grammar {
         
         start =
-            element mathbook {
+            (element mathbook {
                 XMLLang?,
                 DocInfo?,
                 (Book | Article | Letter | Memorandum)
-            }
+            } | Section | Chapter)
         
         
         Article =
@@ -239,7 +239,7 @@
         BlockDivision =
             BlockText | Figure |
             Remark | Theorem | Proof | Definition | Axiom |
-            Example | Exercise | NamedList | Project |
+            Example | Exercise | Exercises | NamedList | Project |
             Poem | Aside | Assemblage | ListGenerator |
             SideBySide | SideBySideGroup | Sage |
             Console | Program |

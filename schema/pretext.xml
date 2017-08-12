@@ -27,11 +27,11 @@
 
         <fragment xml:id="gross-structure">
         start =
-            element mathbook {
+            (element mathbook {
                 XMLLang?,
                 DocInfo?,
                 (Book | Article | Letter | Memorandum)
-            }
+            } | Section | Chapter)
         </fragment>
     </section>
 
@@ -608,7 +608,7 @@
         BlockDivision =
             BlockText | Figure |
             Remark | Theorem | Proof | Definition | Axiom |
-            Example | Exercise | NamedList | Project |
+            Example | Exercise | Exercises | NamedList | Project |
             Poem | Aside | Assemblage | ListGenerator |
             SideBySide | SideBySideGroup | Sage |
             Console | Program |

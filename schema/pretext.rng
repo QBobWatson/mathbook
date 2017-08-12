@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <start>
-    <element name="mathbook">
-      <optional>
-        <ref name="XMLLang"/>
-      </optional>
-      <optional>
-        <ref name="DocInfo"/>
-      </optional>
-      <choice>
-        <ref name="Book"/>
-        <ref name="Article"/>
-        <ref name="Letter"/>
-        <ref name="Memorandum"/>
-      </choice>
-    </element>
+    <choice>
+      <element name="mathbook">
+        <optional>
+          <ref name="XMLLang"/>
+        </optional>
+        <optional>
+          <ref name="DocInfo"/>
+        </optional>
+        <choice>
+          <ref name="Book"/>
+          <ref name="Article"/>
+          <ref name="Letter"/>
+          <ref name="Memorandum"/>
+        </choice>
+      </element>
+      <ref name="Section"/>
+      <ref name="Chapter"/>
+    </choice>
   </start>
   <define name="Article">
     <element name="article">
@@ -538,6 +542,7 @@
       <ref name="Axiom"/>
       <ref name="Example"/>
       <ref name="Exercise"/>
+      <ref name="Exercises"/>
       <ref name="NamedList"/>
       <ref name="Project"/>
       <ref name="Poem"/>
