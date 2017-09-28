@@ -1208,6 +1208,7 @@
           <ref name="SideBySideGroup"/>
           <ref name="Video"/>
           <ref name="JSXGraph"/>
+          <ref name="MathBox"/>
           <ref name="MuseScore"/>
         </choice>
       </element>
@@ -1685,6 +1686,17 @@
       <element name="input">
         <text/>
       </element>
+    </element>
+  </define>
+  <define name="MathBox">
+    <element name="mathbox">
+      <optional>
+        <ref name="UniqueID"/>
+      </optional>
+      <optional>
+        <attribute name="height"/>
+      </optional>
+      <attribute name="source"/>
     </element>
   </define>
   <define name="MuseScore">

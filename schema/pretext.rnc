@@ -117,7 +117,7 @@
             }
         
         
-        ArticleFrontMatter = 
+        ArticleFrontMatter =
             element frontmatter {
                 MetaDataTitleOptional,
                 TitlePage,
@@ -150,7 +150,7 @@
                 element title {TextShort},
                 Author
             }
-        Date = 
+        Date =
             element date {
                 text & Character* & Generator*
             }
@@ -173,17 +173,17 @@
                     element shortlicense {TextLong}?
                 }?
             }
-        Biography = 
+        Biography =
             element biography {
                 MetaDataTitleOptional,
                 BlockText+
             }
-        Dedication = 
+        Dedication =
             element dedication {
                 MetaDataTitleOptional,
                 (Paragraph|ParagraphLined)+
             }
-        Acknowledgement = 
+        Acknowledgement =
             element acknowledgement {
                 MetaDataTitleOptional,
                 BlockText+
@@ -198,7 +198,7 @@
             }
         
         
-        BackMatter = 
+        BackMatter =
             element backmatter {
                 MetaDataTitleOptional,
                 Appendix*,
@@ -206,11 +206,11 @@
                 IndexDivision?,
                 ColophonBack?
             }
-        ColophonBack = 
+        ColophonBack =
             element colophon {(BlockText | SideBySideNoNumber)+}
         
         
-        Paragraphs = 
+        Paragraphs =
             element paragraphs {
                 MetaDataTitleOptional,
                 Index*,
@@ -258,21 +258,21 @@
             element interlude {BlockText+}
         Postlude =
             element postlude {BlockText+}
-        Statement = 
+        Statement =
             element statement {
                 BlockStatement+
             }
-        Hint = 
+        Hint =
             element hint {
                 MetaDataTarget,
                 BlockStatement+
             }
-        Answer = 
+        Answer =
             element answer {
                 MetaDataTarget,
                 BlockStatement+
             }
-        Solution = 
+        Solution =
             element solution {
                 MetaDataTarget,
                 BlockStatement+
@@ -282,7 +282,7 @@
         Objectives =
             element objectives {
                 MetaDataTitleOptional,
-                IntroductionBlock?, 
+                IntroductionBlock?,
                 List,
                 ConclusionBlock?
             }
@@ -380,7 +380,7 @@
         NamedList =
             element list {
                 MetaDataTitleOptional,
-                IntroductionBlock?, 
+                IntroductionBlock?,
                 List,
                 ConclusionBlock?
             }
@@ -390,17 +390,17 @@
             MetaDataTitleOptional,
             Notation*,
             Statement
-        Definition = 
+        Definition =
             element definition {DefinitionLike}
         
         
-        Case = 
+        Case =
             element case {
                MetaDataTitleOptional,
                attribute direction {text}?,
                BlockStatement+
                }
-        Proof = 
+        Proof =
             element proof {
                 MetaDataTitleOptional,
                 (BlockStatement | Case)+
@@ -483,7 +483,7 @@
         RemarkLike =
             MetaDataTitleOptional,
             BlockText+
-        Remark = 
+        Remark =
             element remark {RemarkLike}
         |
             element convention {RemarkLike}
@@ -519,7 +519,7 @@
             }
         
         
-        Caption = 
+        Caption =
             element caption {TextLong}
         Figure =
             element figure {
@@ -530,6 +530,7 @@
                     SideBySideGroup |
                     Video |
                     JSXGraph |
+                    MathBox |
                     MuseScore
                 )
             }
@@ -593,7 +594,7 @@
                 (attribute valign {text} | attribute valigns {text})?,
                 SideBySide+
             }
-        SideBySideWW = 
+        SideBySideWW =
             element sidebyside {
                 attribute margins {text}?,
                 (attribute width {text} | attribute widths {text})?,
@@ -606,7 +607,7 @@
         
         
         Image = ImageRaster | ImageCode | ImageCopy
-        ImageRaster = 
+        ImageRaster =
             element image {
                 UniqueID?,
                 attribute width {text}?,
@@ -614,7 +615,7 @@
                 element description {TextShort}?,
                 attribute source {text}
             }
-        ImageCode = 
+        ImageCode =
             element image {
                 UniqueID?,
                 attribute width {text}?,
@@ -626,12 +627,12 @@
                     element sageplot {text}
                 )
             }
-        ImageCopy = 
+        ImageCopy =
             element image {
                 UniqueID?,
                 attribute copy {text}
             }
-        ImageWW = 
+        ImageWW =
             element image {
                 attribute pg-name {text}?,
                 attribute width {xsd:integer}?,
@@ -714,7 +715,7 @@
                 BorderLeft?,
                 TableCellWW+
             }
-        TabularWW = 
+        TabularWW =
             element tabular {
                 AlignmentHorizontal?,
                 AlignmentVertical?,
@@ -738,21 +739,27 @@
         }
         
         
-        JSXGraph = 
+        JSXGraph =
             element jsxgraph {
                 UniqueID,
                 attribute width {text}?,
                 attribute aspect {text}?,
                 element input {text}
             }
-        MuseScore = 
+        MathBox =
+            element mathbox {
+                UniqueID?,
+                attribute height {text}?,
+                attribute source {text}
+            }
+        MuseScore =
             element score {
                 attribute musescoreuser {text},
                 attribute musescore {text}
             }
         
         
-        Video = 
+        Video =
             element video {
                 UniqueID?,
                 attribute width {text}?,
@@ -769,7 +776,7 @@
             attribute youtube {text}
         
         
-        StatementExercise = 
+        StatementExercise =
             element statement {
                 (
                     BlockStatement |
@@ -783,7 +790,7 @@
                     }
                 )+
             }
-        Exercise = 
+        Exercise =
             element exercise {
                 MetaDataTitleOptional,
                 attribute number {text}?,
@@ -803,7 +810,7 @@
         
         
         AlignmentPoem = attribute halign {"left" | "center" | "right"}
-        Poem = 
+        Poem =
             element poem {
                 MetaDataTitleOptional,
                 AlignmentPoem?,
@@ -813,12 +820,12 @@
                 }?,
                 (PoemLine+ | Stanza+)
             }
-        Stanza = 
+        Stanza =
             element stanza {
                 MetaDataTitleOptional,
                 PoemLine+
             }
-        PoemLine = 
+        PoemLine =
             element line {
                 attribute indent {xsd:integer}?,
                 TextShort
@@ -862,12 +869,12 @@
         
         
         WebWork = (WebWorkAuthored | WebWorkSource)
-        WebWorkSource = 
+        WebWorkSource =
             element webwork {
                 attribute source {text}?,
                 attribute seed {xsd:integer}?
             }
-        WebWorkAuthored = 
+        WebWorkAuthored =
             element webwork {
                 MetaDataTitleOptional,
                 attribute seed {xsd:integer}?,
@@ -894,16 +901,16 @@
                     TabularWW
                 )+
             }
-        WWMacros = 
+        WWMacros =
             element pg-macros {
                 element macro-file {text}+
             }
-        WWSetup = 
+        WWSetup =
             element setup {
                 WWVariableSetup*,
                 element pg-code {text}?
             }
-        WWVariableSetup = 
+        WWVariableSetup =
             element var {
                 attribute name {text},
                 attribute category {"integer"|"number"|"formula"}?,
@@ -920,7 +927,7 @@
                 (attribute name {text},
                 attribute evaluator {text}?,
                 attribute width {text}?,
-                attribute form {"popup"|"buttons"|"none"}?) | 
+                attribute form {"popup"|"buttons"|"none"}?) |
                 (attribute form {"essay"},
                 attribute width {text}?)
             }
@@ -1012,7 +1019,7 @@
             Footnote |
             Notation |
             Index)* }
-        Paragraph = 
+        Paragraph =
             element p {
                 TextParagraph
             }
@@ -1041,7 +1048,7 @@
             }
         
         
-        TextSimple = mixed { 
+        TextSimple = mixed {
             Character* }
         TextShort = mixed { (
             Character |
@@ -1087,7 +1094,7 @@
                 attribute sortby {text}?,
                 attribute start {text}?,
                 attribute finish {text}?,
-                (   
+                (
                     TextShort
                 |
                     (
@@ -1113,8 +1120,8 @@
         Xref =
             element xref {
                     (
-                        attribute ref {text} | 
-                        (attribute first {text}, attribute last {text}) | 
+                        attribute ref {text} |
+                        (attribute first {text}, attribute last {text}) |
                         attribute provisional {text}
                     ),
                     attribute text { XrefTextStyle }?,
@@ -1134,7 +1141,7 @@
             element m {
                 mixed {FillIn*}
             }
-        MathRow = 
+        MathRow =
             element mrow {
                 MetaDataTarget,
                 attribute number {"yes" | "no"}?,
@@ -1173,7 +1180,7 @@
             element m {
                 mixed {(FillIn | WWVariableUse)*}
             }
-        MathRowWW = 
+        MathRowWW =
             element mrow {
                 MetaDataTarget,
                 attribute number {"yes" | "no"}?,
@@ -1209,7 +1216,7 @@
             }
         
         
-        Verbatim = 
+        Verbatim =
             element c {attribute latexsep {text}?, text} |
             element email {text}
         
@@ -1221,7 +1228,7 @@
             element init {TextSimple}
         
             
-        Group |= 
+        Group |=
             element q {TextLong} |
             element sq {TextLong} |
             element braces {TextLong} |
@@ -1230,7 +1237,7 @@
             element dblbrackets {TextLong}
         
             
-        Group |= 
+        Group |=
             element em {TextLong} |
             element term {TextLong} |
             element alert {TextLong} |
@@ -1238,14 +1245,14 @@
             element booktitle {TextLong}
         
             
-        Group |= 
+        Group |=
             element delete {TextLong} |
             element insert {TextLong} |
             element stale {TextLong}
         
         
         
-        Generator = 
+        Generator =
             element today {empty} |
             element timeofday {empty} |
             element tex {empty} |
@@ -1262,7 +1269,7 @@
                 attribute prefix {text}?,
                 attribute base {text},
                 attribute exp {xsd:integer}?
-        Generator |= 
+        Generator |=
             element quantity {
                 element mag {text}?,
                 element unit {UnitSpecification}*,
@@ -1289,30 +1296,30 @@
             element rbrace {empty}
         
             
-        Character |= 
+        Character |=
             element nbsp {empty} |
             element ndash {empty} |
             element mdash {empty}
         
             
         FillIn = element fillin {attribute characters {xsd:integer}?, empty}
-        Character |= 
+        Character |=
             FillIn
         
             
-        Character |= 
+        Character |=
             element lsq {empty} |
             element rsq {empty} |
             element rq {empty} |
             element lq {empty}
         
             
-        Character |= 
+        Character |=
             element solidus {empty} |
             element times {empty}
         
             
-        Character |= 
+        Character |=
             element ellipsis {empty} |
             element asterisk {empty} |
             element slash {empty} |
@@ -1326,7 +1333,7 @@
             element trademark {empty}
         
             
-        Music = 
+        Music =
             element doublesharp {empty} |
             element sharp {empty} |
             element natural {empty} |
@@ -1366,7 +1373,7 @@
             element solution-list {empty}
         
         
-        GGB = 
+        GGB =
             element geogebra-applet {
                 empty |
                 (element ggbBase64 {text},
