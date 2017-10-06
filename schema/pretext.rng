@@ -1161,6 +1161,9 @@
       <element name="technology">
         <ref name="RemarkLike"/>
       </element>
+      <element name="important">
+        <ref name="RemarkLike"/>
+      </element>
     </choice>
   </define>
   <define name="AsideLike">

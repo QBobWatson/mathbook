@@ -1059,6 +1059,7 @@
       <xs:element ref="insight"/>
       <xs:element ref="computation"/>
       <xs:element ref="technology"/>
+      <xs:element ref="important"/>
     </xs:choice>
   </xs:group>
   <xs:element name="remark" type="RemarkLike"/>
@@ -1068,6 +1069,7 @@
   <xs:element name="insight" type="RemarkLike"/>
   <xs:element name="computation" type="RemarkLike"/>
   <xs:element name="technology" type="RemarkLike"/>
+  <xs:element name="important" type="RemarkLike"/>
   <xs:complexType name="AsideLike">
     <xs:sequence>
       <xs:group ref="MetaDataTitleOptional"/>
