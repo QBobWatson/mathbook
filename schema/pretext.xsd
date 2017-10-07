@@ -707,6 +707,7 @@
             </xs:simpleType>
           </xs:attribute>
           <xs:attribute name="label"/>
+          <xs:attribute name="start"/>
         </xs:complexType>
       </xs:element>
       <xs:element name="ul">

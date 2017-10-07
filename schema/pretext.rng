@@ -743,6 +743,9 @@
         <optional>
           <attribute name="label"/>
         </optional>
+        <optional>
+          <attribute name="start"/>
+        </optional>
         <oneOrMore>
           <element name="li">
             <ref name="MetaDataTarget"/>
