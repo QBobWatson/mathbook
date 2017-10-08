@@ -497,7 +497,7 @@
       <xs:group ref="Remark"/>
       <xs:group ref="Theorem"/>
       <xs:element ref="proof"/>
-      <xs:element ref="definition"/>
+      <xs:group ref="Definition"/>
       <xs:group ref="Axiom"/>
       <xs:group ref="Example"/>
       <xs:element ref="exercise"/>
@@ -881,7 +881,14 @@
     </xs:sequence>
     <xs:attributeGroup ref="MetaDataTitleOptional"/>
   </xs:complexType>
+  <xs:group name="Definition">
+    <xs:choice>
+      <xs:element ref="definition"/>
+      <xs:element ref="essential"/>
+    </xs:choice>
+  </xs:group>
   <xs:element name="definition" type="DefinitionLike"/>
+  <xs:element name="essential" type="DefinitionLike"/>
   <xs:element name="case">
     <xs:complexType>
       <xs:sequence>

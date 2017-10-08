@@ -913,9 +913,14 @@
     <ref name="Statement"/>
   </define>
   <define name="Definition">
-    <element name="definition">
-      <ref name="DefinitionLike"/>
-    </element>
+    <choice>
+      <element name="definition">
+        <ref name="DefinitionLike"/>
+      </element>
+      <element name="essential">
+        <ref name="DefinitionLike"/>
+      </element>
+    </choice>
   </define>
   <define name="Case">
     <element name="case">

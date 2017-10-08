@@ -892,6 +892,8 @@
             Statement
         Definition =
             element definition {DefinitionLike}
+        |
+            element essential {DefinitionLike}
         </fragment>
     </section>
 

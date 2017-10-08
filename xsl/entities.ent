@@ -59,8 +59,8 @@
 <!-- below will also match this short form               -->
 
 <!-- definition, just a plain statement, but logically distinct -->
-<!ENTITY DEFINITION-LIKE "definition">
-<!ENTITY DEFINITION-FILTER "self::definition">
+<!ENTITY DEFINITION-LIKE "definition|essential">
+<!ENTITY DEFINITION-FILTER "self::definition or self::essential">
 
 <!-- statement + proof -->
 <!ENTITY THEOREM-LIKE "theorem|corollary|lemma|algorithm|proposition|claim|fact|identity">
