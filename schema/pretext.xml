@@ -173,6 +173,7 @@
         <fragment xml:id="paragraphs">
         Paragraphs =
             element paragraphs {
+                attribute class {text}?,
                 MetaDataTitleOptional,
                 Index*,
                 BlockDivision+

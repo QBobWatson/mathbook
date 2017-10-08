@@ -212,6 +212,7 @@
         
         Paragraphs =
             element paragraphs {
+                attribute class {text}?,
                 MetaDataTitleOptional,
                 Index*,
                 BlockDivision+

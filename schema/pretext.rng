@@ -482,6 +482,9 @@
   </define>
   <define name="Paragraphs">
     <element name="paragraphs">
+      <optional>
+        <attribute name="class"/>
+      </optional>
       <ref name="MetaDataTitleOptional"/>
       <zeroOrMore>
         <ref name="Index"/>
