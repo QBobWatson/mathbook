@@ -79,8 +79,8 @@
 <!ENTITY ASIDE-FILTER "self::aside or self::biographical or self::historical">
 
 <!-- blocks, or statement + solution -->
-<!ENTITY EXAMPLE-LIKE "example|question|problem">
-<!ENTITY EXAMPLE-FILTER "self::example or self::question or self::problem">
+<!ENTITY EXAMPLE-LIKE "example|question|problem|specialcase">
+<!ENTITY EXAMPLE-FILTER "self::example or self::question or self::problem or self::specialcase">
 
 <!-- blocks, or statement + solution -->
 <!-- save off lab, laboratory, experiment for science -->

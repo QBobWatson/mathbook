@@ -1046,6 +1046,9 @@
       <element name="problem">
         <ref name="ExampleLike"/>
       </element>
+      <element name="specialcase">
+        <ref name="ExampleLike"/>
+      </element>
     </choice>
   </define>
   <define name="ProjectLike">
