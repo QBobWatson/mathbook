@@ -50,7 +50,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <localization string-id='assumption'><xsl:text>Assumption</xsl:text></localization>
     <!-- Definitions -->
     <localization string-id='definition'><xsl:text>Definition</xsl:text></localization>
-    <localization string-id='essential'><xsl:text>Essential Definition</xsl:text></localization>
+    <localization string-id='essential'><xsl:text>Definition</xsl:text></localization>
     <!-- Single Line Mathematics -->
     <localization string-id='me'><xsl:text>Equation</xsl:text></localization>
     <localization string-id='men'><xsl:text>Equation</xsl:text></localization>
