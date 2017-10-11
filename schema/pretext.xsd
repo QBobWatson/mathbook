@@ -988,13 +988,11 @@
       <xs:element ref="example"/>
       <xs:element ref="question"/>
       <xs:element ref="problem"/>
-      <xs:element ref="specialcase"/>
     </xs:choice>
   </xs:group>
   <xs:element name="example" type="ExampleLike"/>
   <xs:element name="question" type="ExampleLike"/>
   <xs:element name="problem" type="ExampleLike"/>
-  <xs:element name="specialcase" type="ExampleLike"/>
   <xs:complexType name="ProjectLike">
     <xs:sequence>
       <xs:group ref="MetaDataTitleOptional"/>

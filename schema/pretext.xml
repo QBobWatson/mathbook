@@ -1485,8 +1485,6 @@
             element question {ExampleLike}
         |
             element problem {ExampleLike}
-        |
-            element specialcase {ExampleLike}
         </fragment>
     </section>
 
