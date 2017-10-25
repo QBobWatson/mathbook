@@ -526,8 +526,13 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- NB: blank is not set, and is ignored so the legacy-autoname    -->
 <!-- scheme controls the global default.  When that goes away, we   -->
 <!-- should set the default here when there is no attribute.        -->
-<xsl:variable name="xref-text-style">
+<!-- JDR: modified to choose based on element type -->
+<xsl:template name="xref-text-style">
+    <xsl:param name="string-id" />
     <xsl:choose>
+        <xsl:when test="$string-id != '' and $docinfo/cross-references/type[@match=$string-id]">
+            <xsl:value-of select="$docinfo/cross-references/type[@match=$string-id]/@text" />
+        </xsl:when>
         <xsl:when test="$docinfo/cross-references/@text">
             <xsl:value-of select="$docinfo/cross-references/@text" />
         </xsl:when>
@@ -535,7 +540,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <text />
         </xsl:otherwise>
     </xsl:choose>
-</xsl:variable>
+</xsl:template>
 
 
 <!-- Sometimes  xsltproc fails, and fails spectacularly,        -->
@@ -4608,7 +4613,9 @@ Neither: A structural node that is simply a (visual) subdivision of a chunk
     <xsl:variable name="target" select="id($ref)" />
     <!-- Determine style of visible text in link -->
     <xsl:variable name="text-style">
-        <xsl:apply-templates select="." mode="get-text-style" />
+        <xsl:apply-templates select="." mode="get-text-style">
+            <xsl:with-param name="target" select="$target"/>
+        </xsl:apply-templates>
     </xsl:variable>
     <!-- if target is a bibliography item, generic -->
     <!-- text template only makes a number, we add -->
@@ -4943,6 +4950,12 @@ Neither: A structural node that is simply a (visual) subdivision of a chunk
 <!--   type-global: Theorem 5.2          -->
 <!--   title:       Smith's Theorem      -->
 <xsl:template match="xref" mode="get-text-style">
+    <xsl:param name="target" />
+    <xsl:variable name="xref-text-style">
+        <xsl:call-template name="xref-text-style">
+            <xsl:with-param name="string-id" select="local-name($target)" />
+        </xsl:call-template>
+    </xsl:variable>
     <xsl:choose>
         <!-- local specification is override of global  -->
         <!-- new @text attribute first, and if so, bail -->
@@ -5125,15 +5138,16 @@ Neither: A structural node that is simply a (visual) subdivision of a chunk
         <xsl:when test="$text-style = 'phrase-global' or $text-style = 'phrase-hybrid'">
             <!-- no content override in this case -->
             <!-- maybe we can relax this somehow? -->
-            <xsl:if test="$b-has-content">
-                <xsl:message>MBX:WARNING: providing content ("<xsl:value-of select="." />") for an "xref" element is ignored for 'phrase-global' and 'phrase-hybrid' styles for xref text</xsl:message>
-                <xsl:apply-templates select="." mode="location-report" />
-            </xsl:if>
-            <!-- type-local first, no matter what    -->
-            <!-- for each of the two phrase styles   -->
-            <xsl:apply-templates select="$target" mode="type-name" />
-            <xsl:apply-templates select="." mode="nbsp"/>
-            <xsl:apply-templates select="$target" mode="serial-number" />
+            <xsl:choose>
+                <xsl:when test="$b-has-content">
+                    <xsl:copy-of select="$custom-text" />
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- type-local first                    -->
+                    <!-- for each of the two phrase styles   -->
+                    <xsl:apply-templates select="$target" mode="type-name" />
+                </xsl:otherwise>
+            </xsl:choose>
             <!-- climb up tree to find highest matching structure numbers -->
             <!-- we pass through the two styles so reaction can occur     -->
             <!-- For example for the target Theorem 37.8 of an article,   -->
@@ -5282,7 +5296,7 @@ Neither: A structural node that is simply a (visual) subdivision of a chunk
                 <!-- phrase styles may need remainder of phrase -->
                 <xsl:when test="(($text-style='phrase-global') or ($text-style='phrase-hybrid')) and ($requires-global = 'true')">
                     <!-- connector, internationalize -->
-                    <xsl:text> of </xsl:text>
+                    <xsl:text> in </xsl:text>
                     <xsl:apply-templates select="$highest-match" mode="type-name" />
                     <xsl:apply-templates select="." mode="nbsp" />
                     <xsl:apply-templates select="$highest-match" mode="xref-number" />

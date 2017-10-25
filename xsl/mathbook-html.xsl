@@ -2022,6 +2022,11 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 
 <xsl:template match="paragraphs" mode="body-css-class">
     <xsl:text>paragraphs</xsl:text>
+    <!-- JDR: add classes to paragraphs -->
+    <xsl:if test="@class">
+      <xsl:text> </xsl:text>
+      <xsl:value-of select="@class"/>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="paragraphs" mode="birth-element">
@@ -3425,6 +3430,12 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <xsl:apply-templates select="." mode="number-cols-CSS-class" />
             </xsl:attribute>
         </xsl:if>
+        <!-- JDR: start ordered list at a different nmuber -->
+        <xsl:if test="self::ol and @start">
+            <xsl:attribute name="start">
+                <xsl:value-of select="@start" />
+            </xsl:attribute>
+        </xsl:if>
         <xsl:attribute name="style">
             <xsl:text>list-style-type: </xsl:text>
                 <xsl:apply-templates select="." mode="html-list-label" />
@@ -3472,8 +3483,16 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- Anyway that an image gets placed in a sidebyside  -->
 <!-- panel it should have a relative size filling that -->
 <!-- panel, so this is easy, just 100% all the time    -->
+<!-- JDR: changed this behavior -->
 <xsl:template match="image[ancestor::sidebyside]" mode="get-width-percentage">
-    <xsl:text>100%</xsl:text>
+    <xsl:choose>
+        <xsl:when test="self::image and $docinfo/defaults/image-width">
+            <xsl:value-of select="normalize-space($docinfo/defaults/image-width)" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>100%</xsl:text>
+        </xsl:otherwise>
+    </xsl:choose>
 </xsl:template>
 
 
@@ -5006,7 +5025,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <xsl:apply-templates select="parent::*" mode="type-name"/>
         </span>
         <span class="codenumber">
-            <xsl:apply-templates select="parent::*" mode="number"/>
+            <xsl:apply-templates select="parent::*" mode="serial-number"/>
         </span>
         <xsl:apply-templates />
     </figcaption>
@@ -7288,6 +7307,8 @@ This is a Java Applet created using GeoGebra from www.geogebra.org - it looks li
             <xsl:text>text/x-mathjax-config</xsl:text>
         </xsl:attribute>
         <xsl:text>&#xa;</xsl:text>
+        <!-- JDR: Added the line below -->
+        <xsl:value-of select="$extra.mathjax" />
         <!-- // contrib directory for accessibility menu, moot after v2.6+ -->
         <!-- MathJax.Ajax.config.path["Contrib"] = "<some-url>";           -->
         <xsl:text>MathJax.Hub.Config({&#xa;</xsl:text>
