@@ -173,7 +173,6 @@
         <fragment xml:id="paragraphs">
         Paragraphs =
             element paragraphs {
-                attribute class {text}?,
                 MetaDataTitleOptional,
                 Index*,
                 BlockDivision+
@@ -889,6 +888,7 @@
         <fragment xml:id="definition-like">
         DefinitionLike =
             MetaDataTitleOptional,
+            TypeHandling,
             Notation*,
             Statement
         Definition =
@@ -917,6 +917,7 @@
             }
         TheoremLike =
             MetaDataTitleOptional,
+            TypeHandling,
             (BlockStatement+ | (Statement, Proof*))
         Theorem =
             element theorem {TheoremLike}
@@ -945,6 +946,7 @@
         <fragment xml:id="axiom-like">
         AxiomLike =
             MetaDataTitleOptional,
+            TypeHandling,
             Statement
         Axiom =
             element axiom {AxiomLike}
@@ -969,6 +971,7 @@
         <fragment xml:id="project-like">
         ProjectLike =
             MetaDataTitleOptional,
+            TypeHandling,
             (
                 (BlockStatement+) |
                 (Prelude?, Statement, Hint*, Answer*, Solution*, Postlude?) |
@@ -1002,6 +1005,7 @@
         <fragment xml:id="remark-like">
         RemarkLike =
             MetaDataTitleOptional,
+            TypeHandling,
             BlockText+
         Remark =
             element remark {RemarkLike}
@@ -1019,8 +1023,6 @@
             element computation {RemarkLike}
         |
             element technology {RemarkLike}
-        |
-            element important {RemarkLike}
         </fragment>
     </section>
 
@@ -1033,6 +1035,7 @@
         <fragment xml:id="aside">
         AsideLike =
             MetaDataTitleOptional,
+            TypeHandling,
             BlockStatement+
         Aside =
             element aside {AsideLike}
@@ -1478,9 +1481,12 @@
         <fragment xml:id="example-like">
         ExampleLike =
             MetaDataTitleOptional,
+            TypeHandling,
             ((BlockStatement)+ | (Statement, Hint*, Answer*, Solution*))
         Example =
             element example {ExampleLike}
+        |
+            element specialcase {ExampleLike}
         |
             element question {ExampleLike}
         |
@@ -1627,6 +1633,9 @@
         <fragment xml:id="metadata">
         UniqueID =
             attribute xml:id {text}
+        TypeHandling =
+            attribute type-name {text}?,
+            attribute hide-type {"true"|"false"}?
         Title =
             element title {TextShort}
         Subtitle =
@@ -1839,6 +1848,7 @@
                 XMLLang?,
                 Configuration+
             }
+        <fragment ref="defaults" />
         <fragment ref="brandlogo" />
         <fragment ref="latexpreamble" />
         <fragment ref="macros" />
@@ -1850,6 +1860,15 @@
         <fragment ref="imagearchive" />
         <fragment ref="authorbiographylength" />
         <fragment ref="addins" />
+        </fragment>
+
+        <fragment xml:id="defaults">
+        Defaults =
+            element image-width {text}
+        Configuration |=
+            element defaults {
+                Defaults*
+            }
         </fragment>
 
         <p>A nice icon near the top of an electronic version is a nice touch, and can link back to a project landing page.</p>
@@ -1884,7 +1903,8 @@
         Configuration |=
             element
                 cross-references {
-                    attribute text { XrefTextStyle }
+                    attribute text { XrefTextStyle },
+                    element type { attribute match {text}, attribute text {text} }*
                 }
         </fragment>
 

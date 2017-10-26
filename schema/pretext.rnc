@@ -212,7 +212,6 @@
         
         Paragraphs =
             element paragraphs {
-                attribute class {text}?,
                 MetaDataTitleOptional,
                 Index*,
                 BlockDivision+
@@ -390,6 +389,7 @@
         
         DefinitionLike =
             MetaDataTitleOptional,
+            TypeHandling,
             Notation*,
             Statement
         Definition =
@@ -411,6 +411,7 @@
             }
         TheoremLike =
             MetaDataTitleOptional,
+            TypeHandling,
             (BlockStatement+ | (Statement, Proof*))
         Theorem =
             element theorem {TheoremLike}
@@ -432,6 +433,7 @@
         
         AxiomLike =
             MetaDataTitleOptional,
+            TypeHandling,
             Statement
         Axiom =
             element axiom {AxiomLike}
@@ -449,9 +451,12 @@
         
         ExampleLike =
             MetaDataTitleOptional,
+            TypeHandling,
             ((BlockStatement)+ | (Statement, Hint*, Answer*, Solution*))
         Example =
             element example {ExampleLike}
+        |
+            element specialcase {ExampleLike}
         |
             element question {ExampleLike}
         |
@@ -460,6 +465,7 @@
         
         ProjectLike =
             MetaDataTitleOptional,
+            TypeHandling,
             (
                 (BlockStatement+) |
                 (Prelude?, Statement, Hint*, Answer*, Solution*, Postlude?) |
@@ -486,6 +492,7 @@
         
         RemarkLike =
             MetaDataTitleOptional,
+            TypeHandling,
             BlockText+
         Remark =
             element remark {RemarkLike}
@@ -503,12 +510,11 @@
             element computation {RemarkLike}
         |
             element technology {RemarkLike}
-        |
-            element important {RemarkLike}
         
         
         AsideLike =
             MetaDataTitleOptional,
+            TypeHandling,
             BlockStatement+
         Aside =
             element aside {AsideLike}
@@ -973,6 +979,9 @@
         
         UniqueID =
             attribute xml:id {text}
+        TypeHandling =
+            attribute type-name {text}?,
+            attribute hide-type {"true"|"false"}?
         Title =
             element title {TextShort}
         Subtitle =
@@ -1399,6 +1408,14 @@
                 Configuration+
             }
         
+        Defaults =
+            element image-width {text}
+        Configuration |=
+            element defaults {
+                Defaults*
+            }
+        
+        
         Configuration |=
             element brandlogo {
                 attribute url {text}?,
@@ -1419,7 +1436,8 @@
         Configuration |=
             element
                 cross-references {
-                    attribute text { XrefTextStyle }
+                    attribute text { XrefTextStyle },
+                    element type { attribute match {text}, attribute text {text} }*
                 }
         
         

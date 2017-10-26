@@ -88,17 +88,17 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <localization string-id='convention'><xsl:text>Convention</xsl:text></localization>
     <localization string-id='note'><xsl:text>Note</xsl:text></localization>
     <localization string-id='observation'><xsl:text>Observation</xsl:text></localization>
-    <localization string-id='warning'><xsl:text>Warning</xsl:text></localization>
+    <localization string-id='warning'><xsl:text>Note</xsl:text></localization>
     <localization string-id='insight'><xsl:text>Insight</xsl:text></localization>
     <localization string-id='computation'><xsl:text>Computation</xsl:text></localization>
     <localization string-id='technology'><xsl:text>Technology</xsl:text></localization>
-    <localization string-id='important'><xsl:text>Important Point</xsl:text></localization>
     <!-- ASIDE-LIKE blocks -->
     <localization string-id='aside'><xsl:text>Aside</xsl:text></localization>
     <localization string-id='biographical'><xsl:text>Biographical Aside</xsl:text></localization>
     <localization string-id='historical'><xsl:text>Historical Aside</xsl:text></localization>
     <!-- EXAMPLE-LIKE blocks -->
     <localization string-id='example'><xsl:text>Example</xsl:text></localization>
+    <localization string-id='specialcase'><xsl:text>Example</xsl:text></localization>
     <localization string-id='question'><xsl:text>Question</xsl:text></localization>
     <localization string-id='problem'><xsl:text>Problem</xsl:text></localization>
     <!-- PROJECT-LIKE blocks -->

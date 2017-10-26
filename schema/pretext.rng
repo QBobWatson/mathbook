@@ -482,9 +482,6 @@
   </define>
   <define name="Paragraphs">
     <element name="paragraphs">
-      <optional>
-        <attribute name="class"/>
-      </optional>
       <ref name="MetaDataTitleOptional"/>
       <zeroOrMore>
         <ref name="Index"/>
@@ -910,6 +907,7 @@
   </define>
   <define name="DefinitionLike">
     <ref name="MetaDataTitleOptional"/>
+    <ref name="TypeHandling"/>
     <zeroOrMore>
       <ref name="Notation"/>
     </zeroOrMore>
@@ -949,6 +947,7 @@
   </define>
   <define name="TheoremLike">
     <ref name="MetaDataTitleOptional"/>
+    <ref name="TypeHandling"/>
     <choice>
       <oneOrMore>
         <ref name="BlockStatement"/>
@@ -991,6 +990,7 @@
   </define>
   <define name="AxiomLike">
     <ref name="MetaDataTitleOptional"/>
+    <ref name="TypeHandling"/>
     <ref name="Statement"/>
   </define>
   <define name="Axiom">
@@ -1017,6 +1017,7 @@
   </define>
   <define name="ExampleLike">
     <ref name="MetaDataTitleOptional"/>
+    <ref name="TypeHandling"/>
     <choice>
       <oneOrMore>
         <ref name="BlockStatement"/>
@@ -1040,6 +1041,9 @@
       <element name="example">
         <ref name="ExampleLike"/>
       </element>
+      <element name="specialcase">
+        <ref name="ExampleLike"/>
+      </element>
       <element name="question">
         <ref name="ExampleLike"/>
       </element>
@@ -1050,6 +1054,7 @@
   </define>
   <define name="ProjectLike">
     <ref name="MetaDataTitleOptional"/>
+    <ref name="TypeHandling"/>
     <choice>
       <oneOrMore>
         <ref name="BlockStatement"/>
@@ -1142,6 +1147,7 @@
   </define>
   <define name="RemarkLike">
     <ref name="MetaDataTitleOptional"/>
+    <ref name="TypeHandling"/>
     <oneOrMore>
       <ref name="BlockText"/>
     </oneOrMore>
@@ -1172,13 +1178,11 @@
       <element name="technology">
         <ref name="RemarkLike"/>
       </element>
-      <element name="important">
-        <ref name="RemarkLike"/>
-      </element>
     </choice>
   </define>
   <define name="AsideLike">
     <ref name="MetaDataTitleOptional"/>
+    <ref name="TypeHandling"/>
     <oneOrMore>
       <ref name="BlockStatement"/>
     </oneOrMore>
@@ -2217,6 +2221,19 @@
   <define name="UniqueID">
     <attribute name="xml:id"/>
   </define>
+  <define name="TypeHandling">
+    <optional>
+      <attribute name="type-name"/>
+    </optional>
+    <optional>
+      <attribute name="hide-type">
+        <choice>
+          <value>true</value>
+          <value>false</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
   <define name="Title">
     <element name="title">
       <ref name="TextShort"/>
@@ -3246,6 +3263,18 @@
       </oneOrMore>
     </element>
   </define>
+  <define name="Defaults">
+    <element name="image-width">
+      <text/>
+    </element>
+  </define>
+  <define name="Configuration" combine="choice">
+    <element name="defaults">
+      <zeroOrMore>
+        <ref name="Defaults"/>
+      </zeroOrMore>
+    </element>
+  </define>
   <define name="Configuration" combine="choice">
     <element name="brandlogo">
       <optional>
@@ -3273,6 +3302,12 @@
       <attribute name="text">
         <ref name="XrefTextStyle"/>
       </attribute>
+      <zeroOrMore>
+        <element name="type">
+          <attribute name="match"/>
+          <attribute name="text"/>
+        </element>
+      </zeroOrMore>
     </element>
   </define>
   <define name="Configuration" combine="choice">

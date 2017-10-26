@@ -2022,11 +2022,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 
 <xsl:template match="paragraphs" mode="body-css-class">
     <xsl:text>paragraphs</xsl:text>
-    <!-- JDR: add classes to paragraphs -->
-    <xsl:if test="@class">
-      <xsl:text> </xsl:text>
-      <xsl:value-of select="@class"/>
-    </xsl:if>
 </xsl:template>
 
 <xsl:template match="paragraphs" mode="birth-element">

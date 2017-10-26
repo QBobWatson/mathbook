@@ -2420,6 +2420,7 @@ Neither: A structural node that is simply a (visual) subdivision of a chunk
 <xsl:template match="*" mode="type-name">
     <xsl:call-template name="type-name">
         <xsl:with-param name="string-id" select="local-name(.)" />
+        <xsl:with-param name="override" select="@type-name" />
     </xsl:call-template>
 </xsl:template>
 
@@ -2427,6 +2428,7 @@ Neither: A structural node that is simply a (visual) subdivision of a chunk
 <xsl:template match="objectives/ol/li|objectives/ul/li|objectives/dl/li" mode="type-name">
     <xsl:call-template name="type-name">
         <xsl:with-param name="string-id" select="'objective'" />
+        <xsl:with-param name="override" select="@type-name" />
     </xsl:call-template>
 </xsl:template>
 
@@ -2441,6 +2443,7 @@ Neither: A structural node that is simply a (visual) subdivision of a chunk
 
 <xsl:template name="type-name">
     <xsl:param name="string-id" />
+    <xsl:param name="override" />
     <xsl:variable name="translation">
         <xsl:choose>
             <!-- First look in docinfo for document-specific rename -->
@@ -2456,6 +2459,9 @@ Neither: A structural node that is simply a (visual) subdivision of a chunk
         </xsl:choose>
     </xsl:variable>
     <xsl:choose>
+        <xsl:when test="$override != ''">
+            <xsl:value-of select="$override" />
+        </xsl:when>
         <xsl:when test="$translation!=''"><xsl:value-of select="$translation" /></xsl:when>
         <xsl:otherwise>
             <xsl:text>[</xsl:text>
