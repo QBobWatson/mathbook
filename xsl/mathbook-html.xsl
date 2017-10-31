@@ -887,9 +887,9 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <xsl:template match="notation" mode="backmatter">
     <tr>
         <td style="text-align:left; vertical-align:top;">
-            <xsl:text>\(</xsl:text>
-            <xsl:value-of select="usage" />
-            <xsl:text>\)</xsl:text>
+            <script type="text/x-mathjax-inline">
+                <xsl:value-of select="usage" />
+            </script>
         </td>
         <td style="text-align:left; vertical-align:top;">
             <xsl:apply-templates select="description" />
@@ -3071,18 +3071,17 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         <!-- look ahead to absorb immediate clause-ending punctuation -->
         <xsl:apply-templates select="." mode="get-clause-punctuation" />
     </xsl:variable>
-    <!-- wrap tightly in math delimiters -->
-    <xsl:text>\(</xsl:text>
-    <!-- we clean whitespace that is irrelevant      -->
-    <!-- MathJax is more tolerant than Latex, but    -->
-    <!-- we choose to treat math bits identically    -->
-    <!-- sanitize-latex template does not provide    -->
-    <!-- a final newline and we do not add one here  -->
-    <!-- either for inline math                      -->
-    <xsl:call-template name="sanitize-latex">
-        <xsl:with-param name="text" select="$raw-latex" />
-    </xsl:call-template>
-    <xsl:text>\)</xsl:text>
+    <script type="text/x-mathjax-inline">
+        <!-- we clean whitespace that is irrelevant      -->
+        <!-- MathJax is more tolerant than Latex, but    -->
+        <!-- we choose to treat math bits identically    -->
+        <!-- sanitize-latex template does not provide    -->
+        <!-- a final newline and we do not add one here  -->
+        <!-- either for inline math                      -->
+        <xsl:call-template name="sanitize-latex">
+            <xsl:with-param name="text" select="$raw-latex" />
+        </xsl:call-template>
+    </script>
 </xsl:template>
 
 <!-- Minimal templates for general environments       -->
@@ -3125,24 +3124,27 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </xsl:variable>
     <!-- we provide a newline for visual appeal -->
     <xsl:text>&#xa;</xsl:text>
-    <xsl:text>\begin{</xsl:text>
-    <xsl:apply-templates select="." mode="displaymath-alignment" />
-    <xsl:text>}</xsl:text>
-    <!-- leading whitespace not present, or stripped -->
-    <xsl:text>&#xa;</xsl:text>
-    <!-- we clean whitespace that is irrelevant    -->
-    <!-- MathJax is more tolerant than Latex, but  -->
-    <!-- we choose to treat math bits identically  -->
-    <!-- sanitize-latex template does not provide  -->
-    <!-- a final newline so we add one here        -->
-    <xsl:call-template name="sanitize-latex">
-        <xsl:with-param name="text" select="$raw-latex" />
-    </xsl:call-template>
-    <!-- We add a newline for visually appealing source -->
-    <xsl:text>&#xa;</xsl:text>
-    <xsl:text>\end{</xsl:text>
-    <xsl:apply-templates select="." mode="displaymath-alignment" />
-    <xsl:text>}</xsl:text>
+    <script type="text/x-mathjax-display">
+        <xsl:text>&#xa;</xsl:text>
+        <xsl:text>\begin{</xsl:text>
+        <xsl:apply-templates select="." mode="displaymath-alignment" />
+        <xsl:text>}</xsl:text>
+        <!-- leading whitespace not present, or stripped -->
+        <xsl:text>&#xa;</xsl:text>
+        <!-- we clean whitespace that is irrelevant    -->
+        <!-- MathJax is more tolerant than Latex, but  -->
+        <!-- we choose to treat math bits identically  -->
+        <!-- sanitize-latex template does not provide  -->
+        <!-- a final newline so we add one here        -->
+        <xsl:call-template name="sanitize-latex">
+          <xsl:with-param name="text" select="$raw-latex" />
+        </xsl:call-template>
+        <!-- We add a newline for visually appealing source -->
+        <xsl:text>&#xa;</xsl:text>
+        <xsl:text>\end{</xsl:text>
+        <xsl:apply-templates select="." mode="displaymath-alignment" />
+        <xsl:text>}</xsl:text>
+    </script>
     <!-- we provide a newline for visual appeal -->
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
@@ -3172,24 +3174,27 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </xsl:variable>
     <!-- we provide a newline for visual appeal -->
     <xsl:text>&#xa;</xsl:text>
-    <xsl:text>\begin{</xsl:text>
-    <xsl:apply-templates select="." mode="displaymath-alignment" />
-    <xsl:text>}</xsl:text>
-    <!-- leading whitespace not present, or stripped -->
-    <xsl:text>&#xa;</xsl:text>
-    <!-- we clean whitespace that is irrelevant    -->
-    <!-- MathJax is more tolerant than Latex, but  -->
-    <!-- we choose to treat math bits identically  -->
-    <!-- sanitize-latex template does not provide  -->
-    <!-- a final newline so we add one here        -->
-    <xsl:call-template name="sanitize-latex">
-        <xsl:with-param name="text" select="$raw-latex" />
-    </xsl:call-template>
-    <!-- We add a newline for visually appealing source -->
-    <xsl:text>&#xa;</xsl:text>
-    <xsl:text>\end{</xsl:text>
-    <xsl:apply-templates select="." mode="displaymath-alignment" />
-    <xsl:text>}</xsl:text>
+    <script type="text/x-mathjax-display">
+        <xsl:text>&#xa;</xsl:text>
+        <xsl:text>\begin{</xsl:text>
+        <xsl:apply-templates select="." mode="displaymath-alignment" />
+        <xsl:text>}</xsl:text>
+        <!-- leading whitespace not present, or stripped -->
+        <xsl:text>&#xa;</xsl:text>
+        <!-- we clean whitespace that is irrelevant    -->
+        <!-- MathJax is more tolerant than Latex, but  -->
+        <!-- we choose to treat math bits identically  -->
+        <!-- sanitize-latex template does not provide  -->
+        <!-- a final newline so we add one here        -->
+        <xsl:call-template name="sanitize-latex">
+          <xsl:with-param name="text" select="$raw-latex" />
+        </xsl:call-template>
+        <!-- We add a newline for visually appealing source -->
+        <xsl:text>&#xa;</xsl:text>
+        <xsl:text>\end{</xsl:text>
+        <xsl:apply-templates select="." mode="displaymath-alignment" />
+        <xsl:text>}</xsl:text>
+    </script>
     <!-- we provide a newline for visual appeal -->
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
@@ -3210,19 +3215,22 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:param name="b-top-level" select="false()" />
     <!-- We add a newline for visually appealing source -->
     <xsl:text>&#xa;</xsl:text>
-    <xsl:text>\begin{</xsl:text>
-    <xsl:apply-templates select="." mode="displaymath-alignment" />
-    <xsl:text>}</xsl:text>
-    <xsl:apply-templates select="." mode="alignat-columns" />
-    <!-- We add a newline for visually appealing source -->
-    <xsl:text>&#xa;</xsl:text>
-    <xsl:apply-templates select="mrow|intertext">
-        <xsl:with-param name="b-original" select="$b-original" />
-        <xsl:with-param name="b-top-level" select="$b-top-level" />
-    </xsl:apply-templates>
-    <xsl:text>\end{</xsl:text>
-    <xsl:apply-templates select="." mode="displaymath-alignment" />
-    <xsl:text>}</xsl:text>
+    <script type="text/x-mathjax-display">
+        <xsl:text>&#xa;</xsl:text>
+        <xsl:text>\begin{</xsl:text>
+        <xsl:apply-templates select="." mode="displaymath-alignment" />
+        <xsl:text>}</xsl:text>
+        <xsl:apply-templates select="." mode="alignat-columns" />
+        <!-- We add a newline for visually appealing source -->
+        <xsl:text>&#xa;</xsl:text>
+        <xsl:apply-templates select="mrow|intertext">
+          <xsl:with-param name="b-original" select="$b-original" />
+          <xsl:with-param name="b-top-level" select="$b-top-level" />
+        </xsl:apply-templates>
+        <xsl:text>\end{</xsl:text>
+        <xsl:apply-templates select="." mode="displaymath-alignment" />
+        <xsl:text>}</xsl:text>
+    </script>
     <!-- We add a newline for visually appealing source -->
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
@@ -3317,10 +3325,13 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:text>}&#xa;</xsl:text>
     <xsl:apply-templates />
     <xsl:text>&#xa;</xsl:text>
-    <xsl:text>\begin{</xsl:text>
-    <xsl:apply-templates select="parent::*" mode="displaymath-alignment" />
-    <xsl:text>}</xsl:text>
-    <xsl:apply-templates select="parent::*" mode="alignat-columns" />
+    <script type="text/x-mathjax-display">
+        <xsl:text>&#xa;</xsl:text>
+        <xsl:text>\begin{</xsl:text>
+        <xsl:apply-templates select="parent::*" mode="displaymath-alignment" />
+        <xsl:text>}</xsl:text>
+        <xsl:apply-templates select="parent::*" mode="alignat-columns" />
+    </script>
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
@@ -5206,12 +5217,33 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </xsl:if>
 </xsl:template>
 
-<!-- Magnitude                                      -->
+<!-- Magnitude                                       -->
+<!-- JDR: annoying to replace a string by an element -->
+<xsl:template name="replace-pi">
+    <xsl:param name="mag"/>
+    <xsl:choose>
+        <xsl:when test="contains($mag, '\pi')">
+            <xsl:value-of select="substring-before($mag, '\pi')"/>
+            <script type="text/x-mathjax-inline">
+                <xsl:text>\pi</xsl:text>
+            </script>
+            <xsl:call-template name="replace-pi">
+                <xsl:with-param name="mag" select="substring-after($mag, '\pi')"/>
+            </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:value-of select="$mag"/>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
 <xsl:template match="mag">
     <xsl:variable name="mag">
         <xsl:apply-templates />
     </xsl:variable>
-    <xsl:value-of select="str:replace($mag,'\pi','\(\pi\)')"/>
+    <xsl:call-template name="replace-pi">
+        <xsl:with-param name="mag" select="$mag"/>
+    </xsl:call-template>
 </xsl:template>
 
 <!-- unit and per children of a quantity element    -->
@@ -6382,7 +6414,7 @@ This is a Java Applet created using GeoGebra from www.geogebra.org - it looks li
             <xsl:call-template name="hypothesis-annotation" />
             <xsl:call-template name="jsxgraph" />
             <xsl:call-template name="css" />
-            <xsl:call-template name="pytutor-header" />
+            <!-- <xsl:call-template name="pytutor-header" /> -->
         </head>
         <xsl:element name="body">
             <!-- the first class controls the default icon -->
@@ -6439,7 +6471,7 @@ This is a Java Applet created using GeoGebra from www.geogebra.org - it looks li
                 </main>
             </div>
             <xsl:apply-templates select="/mathbook/docinfo/analytics" />
-            <xsl:call-template name="pytutor-footer" />
+            <!-- <xsl:call-template name="pytutor-footer" /> -->
         </xsl:element>
     </html>
     </exsl:document>
