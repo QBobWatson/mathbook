@@ -887,7 +887,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <xsl:template match="notation" mode="backmatter">
     <tr>
         <td style="text-align:left; vertical-align:top;">
-            <script type="text/x-mathjax-inline">
+            <script type="text/x-latex-inline">
                 <xsl:value-of select="usage" />
             </script>
         </td>
@@ -1444,6 +1444,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <!-- anywhere in the document, and that is         -->
                 <!-- sufficient for the external knowl             -->
                 <xsl:apply-templates select="." mode="sagecell" />
+                <style id="pretex-fonts"></style>
             </head>
             <body>
                 <!-- content, in xref style or hidden style     -->
@@ -3071,7 +3072,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         <!-- look ahead to absorb immediate clause-ending punctuation -->
         <xsl:apply-templates select="." mode="get-clause-punctuation" />
     </xsl:variable>
-    <script type="text/x-mathjax-inline">
+    <script type="text/x-latex-inline">
         <!-- we clean whitespace that is irrelevant      -->
         <!-- MathJax is more tolerant than Latex, but    -->
         <!-- we choose to treat math bits identically    -->
@@ -3124,7 +3125,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </xsl:variable>
     <!-- we provide a newline for visual appeal -->
     <xsl:text>&#xa;</xsl:text>
-    <script type="text/x-mathjax-display">
+    <script type="text/x-latex-display">
         <xsl:text>&#xa;</xsl:text>
         <xsl:text>\begin{</xsl:text>
         <xsl:apply-templates select="." mode="displaymath-alignment" />
@@ -3174,7 +3175,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </xsl:variable>
     <!-- we provide a newline for visual appeal -->
     <xsl:text>&#xa;</xsl:text>
-    <script type="text/x-mathjax-display">
+    <script type="text/x-latex-display">
         <xsl:text>&#xa;</xsl:text>
         <xsl:text>\begin{</xsl:text>
         <xsl:apply-templates select="." mode="displaymath-alignment" />
@@ -3215,7 +3216,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:param name="b-top-level" select="false()" />
     <!-- We add a newline for visually appealing source -->
     <xsl:text>&#xa;</xsl:text>
-    <script type="text/x-mathjax-display">
+    <script type="text/x-latex-display">
         <xsl:text>&#xa;</xsl:text>
         <xsl:text>\begin{</xsl:text>
         <xsl:apply-templates select="." mode="displaymath-alignment" />
@@ -3325,7 +3326,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:text>}&#xa;</xsl:text>
     <xsl:apply-templates />
     <xsl:text>&#xa;</xsl:text>
-    <script type="text/x-mathjax-display">
+    <script type="text/x-latex-display">
         <xsl:text>&#xa;</xsl:text>
         <xsl:text>\begin{</xsl:text>
         <xsl:apply-templates select="parent::*" mode="displaymath-alignment" />
@@ -3566,11 +3567,18 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </xsl:choose>
 </xsl:template>
 
+<!-- JDR: just output a latex tag for the preprocessor -->
+<xsl:template match="image[latex-image-code]">
+    <script type="text/x-latex-code">
+        <xsl:value-of select="latex-image-code"/>
+    </script>
+</xsl:template>
+
 <!-- SVG's produced by mbx script                  -->
 <!--   Asymptote graphics language                 -->
 <!--   LaTeX source code images                    -->
 <!--   Sage graphics plots, w/ PNG fallback for 3D -->
-<xsl:template match="image[asymptote]|image[latex-image-code]|image[sageplot]">
+<xsl:template match="image[asymptote]|image[sageplot]">
     <xsl:variable name="base-pathname">
         <xsl:value-of select="$directory.images" />
         <xsl:text>/</xsl:text>
@@ -5224,7 +5232,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:choose>
         <xsl:when test="contains($mag, '\pi')">
             <xsl:value-of select="substring-before($mag, '\pi')"/>
-            <script type="text/x-mathjax-inline">
+            <script type="text/x-latex-inline">
                 <xsl:text>\pi</xsl:text>
             </script>
             <xsl:call-template name="replace-pi">

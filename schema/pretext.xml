@@ -512,6 +512,11 @@
             element m {
                 mixed {FillIn*}
             }
+        |
+            element latex-code {
+                attribute inline {"true"},
+                text
+            }
         MathRow =
             element mrow {
                 MetaDataTarget,
@@ -547,6 +552,8 @@
                 MathRow,
                 (MathRow | MathIntertext)*
             }
+        |
+            element latex-code {text}
         MathInlineWW =
             element m {
                 mixed {(FillIn | WWVariableUse)*}

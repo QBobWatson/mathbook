@@ -2335,7 +2335,7 @@
   </xs:element>
   <xs:element name="usage" type="xs:string"/>
   <xs:group name="MathInline">
-    <xs:sequence>
+    <xs:choice>
       <xs:element name="m">
         <xs:complexType mixed="true">
           <xs:sequence>
@@ -2343,7 +2343,18 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-    </xs:sequence>
+      <xs:element name="latex-code">
+        <xs:complexType mixed="true">
+          <xs:attribute name="inline" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="true"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
   </xs:group>
   <xs:group name="MathRow">
     <xs:sequence>
@@ -2458,6 +2469,7 @@
           <xs:attribute name="alignat-columns"/>
         </xs:complexType>
       </xs:element>
+      <xs:element name="latex-code" type="xs:string"/>
     </xs:choice>
   </xs:group>
   <xs:group name="MathInlineWW">

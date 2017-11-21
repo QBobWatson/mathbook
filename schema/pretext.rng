@@ -2552,13 +2552,21 @@
     </element>
   </define>
   <define name="MathInline">
-    <element name="m">
-      <mixed>
-        <zeroOrMore>
-          <ref name="FillIn"/>
-        </zeroOrMore>
-      </mixed>
-    </element>
+    <choice>
+      <element name="m">
+        <mixed>
+          <zeroOrMore>
+            <ref name="FillIn"/>
+          </zeroOrMore>
+        </mixed>
+      </element>
+      <element name="latex-code">
+        <attribute name="inline">
+          <value>true</value>
+        </attribute>
+        <text/>
+      </element>
+    </choice>
   </define>
   <define name="MathRow">
     <element name="mrow">
@@ -2672,6 +2680,9 @@
             <ref name="MathIntertext"/>
           </choice>
         </zeroOrMore>
+      </element>
+      <element name="latex-code">
+        <text/>
       </element>
     </choice>
   </define>
