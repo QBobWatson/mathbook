@@ -4391,7 +4391,8 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 </title>
                 <meta name="Keywords" content="Authored in PreTeXt" />
                 <!-- http://webdesignerwall.com/tutorials/responsive-design-in-3-steps -->
-                <meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+                <!-- <meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" /> -->
+                <meta name="viewport" content="width=device-width,  initial-scale=1.0" />
                 <!-- ########################################## -->
                 <!-- A variety of libraries were loaded here    -->
                 <!-- Only purpose of this page is YouTube video -->
@@ -6403,7 +6404,8 @@ This is a Java Applet created using GeoGebra from www.geogebra.org - it looks li
             </title>
             <meta name="Keywords" content="Authored in PreTeXt" />
             <!-- http://webdesignerwall.com/tutorials/responsive-design-in-3-steps -->
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+            <!-- <meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" /> -->
+            <meta name="viewport" content="width=device-width,  initial-scale=1.0" />
             <!-- jquery used by sage, webwork, knowls -->
             <xsl:call-template name="jquery-sagecell" />
             <xsl:call-template name="mathjax" />
@@ -6502,7 +6504,8 @@ This is a Java Applet created using GeoGebra from www.geogebra.org - it looks li
     <html lang="{$document-language}"> <!-- dir="rtl" here -->
         <head>
             <meta name="Keywords" content="Authored in PreTeXt" />
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+            <!-- <meta name="viewport" content="width=device-width,  initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" /> -->
+            <meta name="viewport" content="width=device-width,  initial-scale=1.0" />
 
             <!-- jquery used by sage, webwork, knowls -->
             <xsl:call-template name="jquery-sagecell" />
