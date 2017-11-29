@@ -1158,7 +1158,7 @@
             }
         |
             element latex-code {
-                attribute inline {"true"},
+                attribute mode {"display" | "inline" | "bare"}?,
                 text
             }
         MathRow =

@@ -2345,10 +2345,12 @@
       </xs:element>
       <xs:element name="latex-code">
         <xs:complexType mixed="true">
-          <xs:attribute name="inline" use="required">
+          <xs:attribute name="mode">
             <xs:simpleType>
               <xs:restriction base="xs:token">
-                <xs:enumeration value="true"/>
+                <xs:enumeration value="display"/>
+                <xs:enumeration value="inline"/>
+                <xs:enumeration value="bare"/>
               </xs:restriction>
             </xs:simpleType>
           </xs:attribute>

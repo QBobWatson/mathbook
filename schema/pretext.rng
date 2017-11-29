@@ -2561,9 +2561,15 @@
         </mixed>
       </element>
       <element name="latex-code">
-        <attribute name="inline">
-          <value>true</value>
-        </attribute>
+        <optional>
+          <attribute name="mode">
+            <choice>
+              <value>display</value>
+              <value>inline</value>
+              <value>bare</value>
+            </choice>
+          </attribute>
+        </optional>
         <text/>
       </element>
     </choice>
