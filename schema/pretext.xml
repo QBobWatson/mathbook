@@ -919,6 +919,7 @@
                }
         Proof =
             element proof {
+                attribute visible {"true"|"false"}?,
                 MetaDataTitleOptional,
                 (BlockStatement | Case)+
             }
