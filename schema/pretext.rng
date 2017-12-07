@@ -143,6 +143,14 @@
   </define>
   <define name="Subsection">
     <element name="subsection">
+      <optional>
+        <attribute name="hidden">
+          <choice>
+            <value>true</value>
+            <value>false</value>
+          </choice>
+        </attribute>
+      </optional>
       <ref name="MetaDataTitle"/>
       <optional>
         <ref name="Objectives"/>

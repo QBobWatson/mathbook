@@ -205,7 +205,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <xsl:strip-space elements="remark convention note observation warning insight" />
 <!-- List is elements in EXAMPLE-LIKE entity -->
 <!-- example|question|problem                -->
-<xsl:strip-space elements="example question problem" />
+<xsl:strip-space elements="example question problem specialcase" />
 <!-- List is elements in PROJECT-LIKE entity -->
 <!-- project|activity|exploration|investigation -->
 <xsl:strip-space elements="project activity exploration investigation" />

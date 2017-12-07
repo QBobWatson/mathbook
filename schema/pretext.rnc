@@ -64,6 +64,7 @@
             }
         Subsection =
             element subsection {
+                attribute hidden {"true"|"false"}?,
                 MetaDataTitle,
                 Objectives?,
                 (
