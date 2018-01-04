@@ -213,6 +213,7 @@
         
         Paragraphs =
             element paragraphs {
+                attribute visible {"true"|"false"}?,
                 MetaDataTitleOptional,
                 Index*,
                 BlockDivision+
