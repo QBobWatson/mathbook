@@ -1293,7 +1293,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:param name="heading-group" />
     <!-- range through node-list, making cross-references -->
     <span class="indexknowl">
-        <xsl:text>, </xsl:text>
+        <!-- <xsl:text>, </xsl:text> -->
         <xsl:for-each select="$heading-group">
             <xsl:choose>
                 <xsl:when test="see">
