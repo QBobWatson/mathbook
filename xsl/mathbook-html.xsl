@@ -6477,6 +6477,7 @@ This is a Java Applet created using GeoGebra from www.geogebra.org - it looks li
                 <main class="main">
                     <div id="content" class="mathbook-content">
                         <xsl:copy-of select="$content" />
+                        <xsl:call-template name="feedback-link" />
                     </div>
                 </main>
             </div>
