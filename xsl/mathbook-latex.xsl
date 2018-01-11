@@ -463,8 +463,13 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:text>%% Also, fontenc with T1 makes CM-Super the default font&#xa;</xsl:text>
     <!-- http://tex.stackexchange.com/questions/88368/how-do-i-invoke-cm-super -->
     <xsl:text>%% (\input{ix-utf8enc.dfu} from the "inputenx" package is possible addition (broken?)&#xa;</xsl:text>
+    <xsl:text>\usepackage{amsmath}&#xa;</xsl:text>
+    <xsl:text>\usepackage{amssymb}&#xa;</xsl:text>
     <xsl:text>\usepackage[T1]{fontenc}&#xa;</xsl:text>
     <xsl:text>\usepackage[utf8]{inputenc}&#xa;</xsl:text>
+    <xsl:text>\usepackage[charter,sfscaled,ttscaled,cal=cmcal]{mathdesign}</xsl:text>
+    <xsl:text>\renewcommand{\sfdefault}{phv}</xsl:text>
+    <xsl:text>\usepackage{textcomp}</xsl:text>
     <!-- TODO: put a pdflatex font package hook here? -->
     <xsl:text>%% end: pdflatex-specific configuration&#xa;</xsl:text>
     <xsl:text>}&#xa;</xsl:text>
@@ -506,7 +511,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:text>%% this is exactly the opposite of AMSmath package philosophy&#xa;</xsl:text>
     <xsl:text>%% there are per-display, and per-equation options to control this&#xa;</xsl:text>
     <xsl:text>%% split, aligned, gathered, and alignedat are not affected&#xa;</xsl:text>
-    <xsl:text>\allowdisplaybreaks[4]&#xa;</xsl:text>
+    <xsl:text>%\allowdisplaybreaks[4]&#xa;</xsl:text>
     <xsl:text>%% allow more columns to a matrix&#xa;</xsl:text>
     <xsl:text>%% can make this even bigger by overriding with  latex.preamble.late  processing option&#xa;</xsl:text>
     <xsl:text>\setcounter{MaxMatrixCols}{30}&#xa;</xsl:text>
@@ -638,7 +643,8 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:if test="/mathbook//case[@direction]">
         <xsl:text>%% Arrows for iff proofs, with trailing space&#xa;</xsl:text>
         <xsl:text>\newcommand{\forwardimplication}{($\Rightarrow$)\space\space}&#xa;</xsl:text>
-        <xsl:text>\newcommand{\backwardimplication}{($\Leftarrow$)\space\space}&#xa;</xsl:text>
+
+<xsl:text>\newcommand{\backwardimplication}{($\Leftarrow$)\space\space}&#xa;</xsl:text>
     </xsl:if>
     <xsl:text>%% Subdivision Numbering, Chapters, Sections, Subsections, etc&#xa;</xsl:text>
     <xsl:text>%% Subdivision numbers may be turned off at some level ("depth")&#xa;</xsl:text>
@@ -1034,7 +1040,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         <xsl:text>%% You can remove the [H] argument of the \newfloat command, to allow flotation and &#xa;</xsl:text>
         <xsl:text>%% preserve numbering, BUT the numbering may then appear "out-of-order"&#xa;</xsl:text>
         <xsl:text>\usepackage{float}&#xa;</xsl:text>
-        <xsl:text>\usepackage[bf]{caption} % http://tex.stackexchange.com/questions/95631/defining-a-new-type-of-floating-environment &#xa;</xsl:text>
+        <xsl:text>\usepackage[labelformat=empty,textfont=it]{caption} % http://tex.stackexchange.com/questions/95631/defining-a-new-type-of-floating-environment &#xa;</xsl:text>
         <xsl:text>\usepackage{newfloat}&#xa;</xsl:text>
         <!-- captioned items subsidiary to a captioned figure -->
         <xsl:if test="//figure/sidebyside/*[caption]">
@@ -1687,7 +1693,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </xsl:if>
     <xsl:if test="$document-root//contributors">
         <xsl:text>%% Semantic macros for contributor list&#xa;</xsl:text>
-        <xsl:text>\newcommand{\contributor}[1]{\noindent{}#1\par\bigskip}&#xa;</xsl:text>
+        <xsl:text>\newcommand{\contributor}[1]{\vbox{\noindent{}#1\par\bigskip}\leavevmode\\}&#xa;</xsl:text>
         <xsl:text>\newcommand{\contributorname}[1]{\textsc{#1}\\[0.25\baselineskip]}&#xa;</xsl:text>
         <xsl:text>\newcommand{\contributorinfo}[1]{\hspace*{0.05\linewidth}\parbox{0.95\linewidth}{\textsl{#1}}}&#xa;</xsl:text>
     </xsl:if>
@@ -1756,7 +1762,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:text>\thispagestyle{empty}&#xa;</xsl:text>
     <xsl:text>{\centering&#xa;</xsl:text>
     <xsl:text>\vspace*{0.28\textheight}&#xa;</xsl:text>
-    <xsl:text>{\Huge </xsl:text>
+    <xsl:text>{\Huge\bfseries </xsl:text>
     <xsl:apply-templates select="/mathbook/book" mode="title-full"/>
     <xsl:text>}\\</xsl:text> <!-- always end line inside centering -->
     <xsl:if test="/mathbook/book/subtitle">
@@ -1810,7 +1816,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <xsl:text>}{}&#xa;</xsl:text>
         </xsl:otherwise>
     </xsl:choose>
-    <xsl:text>{\Huge </xsl:text>
+    <xsl:text>{\Huge\bfseries </xsl:text>
     <xsl:apply-templates select="." mode="title-full" />
     <xsl:text>}\\</xsl:text> <!-- end line inside centering -->
     <xsl:if test="subtitle">
@@ -2878,6 +2884,29 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:text>}]</xsl:text>
 </xsl:template>
 
+<xsl:template match="*" mode="get-hide-type">
+    <xsl:choose>
+        <xsl:when test="@hide-type">
+            <xsl:value-of select="@hide-type"/>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:text>false</xsl:text>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+<!-- Blue boxes hide type by default -->
+<xsl:template match="bluebox" mode="get-hide-type">
+    <xsl:choose>
+        <xsl:when test="@hide-type">
+            <xsl:value-of select="@hide-type"/>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:text>true</xsl:text>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
 <!-- Theorems, Axioms, Definitions -->
 <!-- Statement structure should be relaxed,       -->
 <!-- especially for axioms, definitions, style is -->
@@ -2885,21 +2914,52 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- style parameters in effect when LaTeX        -->
 <!-- environments are declared                    -->
 <xsl:template match="&DEFINITION-LIKE;|&THEOREM-LIKE;|&AXIOM-LIKE;">
+    <xsl:variable name="hide-type">
+        <xsl:apply-templates select="." mode="get-hide-type"/>
+    </xsl:variable>
+    <xsl:variable name="env-name">
+        <xsl:choose>
+            <xsl:when test="$hide-type='true' or @type-name">
+                <xsl:text>oneoffthm</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="local-name(.)" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <xsl:text>\begin{</xsl:text>
-        <xsl:value-of select="local-name(.)" />
+    <xsl:value-of select="$env-name"/>
     <xsl:text>}</xsl:text>
     <!-- optional argument to environment -->
     <!-- TODO: and/or credit              -->
-    <xsl:text>[{</xsl:text>
-    <xsl:apply-templates select="." mode="title-full" />
-    <xsl:text>}]</xsl:text>
+    <xsl:if test="not($hide-type='true')">
+        <xsl:text>[{</xsl:text>
+        <xsl:apply-templates select="." mode="title-full" />
+        <xsl:text>}]</xsl:text>
+    </xsl:if>
+    <xsl:choose>
+        <xsl:when test="$hide-type='true'">
+            <xsl:text>{</xsl:text>
+            <xsl:apply-templates select="." mode="theorem-style" />
+            <xsl:text>}{</xsl:text>
+            <xsl:apply-templates select="." mode="title-full" />
+            <xsl:text>}</xsl:text>
+        </xsl:when>
+        <xsl:when test="@type-name">
+            <xsl:text>{</xsl:text>
+            <xsl:apply-templates select="." mode="theorem-style" />
+            <xsl:text>}{</xsl:text>
+            <xsl:value-of select="@type-name" />
+            <xsl:text>}</xsl:text>
+        </xsl:when>
+    </xsl:choose>
     <xsl:apply-templates select="." mode="label"/>
     <xsl:text>&#xa;</xsl:text>
     <!-- statement is required now, to be relaxed in DTD      -->
     <!-- explicitly ignore proof and pickup just for theorems -->
     <xsl:apply-templates select="*[not(self::proof)]" />
     <xsl:text>\end{</xsl:text>
-        <xsl:value-of select="local-name(.)" />
+    <xsl:value-of select="$env-name"/>
     <xsl:text>}&#xa;</xsl:text>
     <!-- proof is optional, so may not match at  -->
     <!-- all, make sure proof is not possible    -->
@@ -3429,14 +3489,50 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:if test="statement or ((&PROJECT-FILTER;) and task)">
         <xsl:apply-templates select="prelude" />
     </xsl:if>
+    <xsl:variable name="hide-type">
+        <xsl:apply-templates select="." mode="get-hide-type"/>
+    </xsl:variable>
+    <xsl:variable name="env-name">
+        <xsl:choose>
+            <xsl:when test="$hide-type='true' or @type-name">
+                <xsl:choose>
+                    <xsl:when test="self::bluebox">
+                        <xsl:text>oneoffbluebox</xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>oneoffthm</xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="local-name(.)" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <xsl:text>\begin{</xsl:text>
-        <xsl:value-of select="local-name(.)" />
+    <xsl:value-of select="$env-name"/>
     <xsl:text>}</xsl:text>
     <!-- optional argument to environment -->
     <!-- TODO: and/or credit              -->
-    <xsl:text>[</xsl:text>
-    <xsl:apply-templates select="." mode="title-full" />
-    <xsl:text>]</xsl:text>
+    <xsl:if test="not($hide-type='true')">
+        <xsl:text>[</xsl:text>
+        <xsl:apply-templates select="." mode="title-full" />
+        <xsl:text>]</xsl:text>
+    </xsl:if>
+    <xsl:choose>
+        <xsl:when test="$hide-type='true'">
+            <xsl:text>{</xsl:text>
+            <xsl:apply-templates select="." mode="theorem-style" />
+            <xsl:text>}{</xsl:text>
+            <xsl:apply-templates select="." mode="title-full" />
+            <xsl:text>}</xsl:text>
+        </xsl:when>
+        <xsl:when test="@type-name">
+            <xsl:text>{</xsl:text>
+            <xsl:apply-templates select="." mode="theorem-style" />
+            <xsl:text>}{</xsl:text>
+            <xsl:value-of select="@type-name" />
+            <xsl:text>}</xsl:text>
+        </xsl:when>
+    </xsl:choose>
     <xsl:apply-templates select="." mode="label"/>
     <xsl:text>&#xa;</xsl:text>
     <xsl:choose>
@@ -3472,7 +3568,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         </xsl:otherwise>
     </xsl:choose>
     <xsl:text>\end{</xsl:text>
-        <xsl:value-of select="local-name(.)" />
+    <xsl:value-of select="$env-name"/>
     <xsl:text>}&#xa;</xsl:text>
     <xsl:if test="statement or ((&PROJECT-FILTER;) and task)">
         <xsl:apply-templates select="postlude" />
@@ -4249,6 +4345,11 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         <xsl:text>]</xsl:text>
     </xsl:if>
     <xsl:text>&#xa;</xsl:text>
+    <xsl:if test="@start">
+        <xsl:text>\setcounter{enumi}{</xsl:text>
+        <xsl:value-of select="@start" />
+        <xsl:text>}&#xa;</xsl:text>
+    </xsl:if>
      <xsl:apply-templates />
     <xsl:text>\end{enumerate}&#xa;</xsl:text>
     <xsl:if test="@cols">
@@ -7315,6 +7416,15 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 
     <xsl:value-of select="str:replace($sans-caret, '[[TlWvKovNykSRI]]', '\textbackslash{}')" />
 </xsl:template>
+
+<xsl:template match="&THEOREM-LIKE;|&AXIOM-LIKE;" mode="theorem-style">
+    <xsl:text>plain</xsl:text>
+</xsl:template>
+
+<xsl:template match="&DEFINITION-LIKE;|&REMARK-LIKE;|&EXAMPLE-LIKE;|&PROJECT-LIKE;" mode="theorem-style">
+    <xsl:text>definition</xsl:text>
+</xsl:template>
+
 
 <!-- Miscellaneous -->
 
