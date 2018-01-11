@@ -6444,6 +6444,7 @@ This is a Java Applet created using GeoGebra from www.geogebra.org - it looks li
              <header id="masthead" class="smallbuttons">
                 <div class="banner">
                     <xsl:call-template name="google-search-box" />
+                    <xsl:call-template name="pdf-version" />
                     <div class="container">
                         <xsl:call-template name="brand-logo" />
                         <div class="title-container">

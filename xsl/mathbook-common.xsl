@@ -202,7 +202,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <xsl:strip-space elements="axiom conjecture principle heuristic hypothesis assumption" />
 <!-- List is elements in REMARK-LIKE entity             -->
 <!-- remark|convention|note|observation|warning|insight -->
-<xsl:strip-space elements="remark convention note observation warning insight" />
+<xsl:strip-space elements="remark convention note observation warning bluebox insight" />
 <!-- List is elements in EXAMPLE-LIKE entity -->
 <!-- example|question|problem                -->
 <xsl:strip-space elements="example question problem specialcase" />

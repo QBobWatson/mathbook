@@ -88,7 +88,8 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <localization string-id='convention'><xsl:text>Convention</xsl:text></localization>
     <localization string-id='note'><xsl:text>Note</xsl:text></localization>
     <localization string-id='observation'><xsl:text>Observation</xsl:text></localization>
-    <localization string-id='warning'><xsl:text>Important Note</xsl:text></localization>
+    <localization string-id='warning'><xsl:text>Warning</xsl:text></localization>
+    <localization string-id='bluebox'><xsl:text>Important Note</xsl:text></localization>
     <localization string-id='insight'><xsl:text>Insight</xsl:text></localization>
     <localization string-id='computation'><xsl:text>Computation</xsl:text></localization>
     <localization string-id='technology'><xsl:text>Technology</xsl:text></localization>

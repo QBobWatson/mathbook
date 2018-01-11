@@ -1033,6 +1033,8 @@
             element computation {RemarkLike}
         |
             element technology {RemarkLike}
+        |
+            element bluebox {RemarkLike}
         </fragment>
     </section>
 

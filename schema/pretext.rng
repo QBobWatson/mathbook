@@ -1202,6 +1202,9 @@
       <element name="technology">
         <ref name="RemarkLike"/>
       </element>
+      <element name="bluebox">
+        <ref name="RemarkLike"/>
+      </element>
     </choice>
   </define>
   <define name="AsideLike">
