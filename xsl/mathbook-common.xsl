@@ -5061,14 +5061,71 @@ Neither: A structural node that is simply a (visual) subdivision of a chunk
     </xsl:choose>
 </xsl:template>
 
-<!-- The text that will be visible and clickable    -->
-<!-- Bibliography items return a naked number,      -->
-<!-- caller is responsible for adjusting text with  -->
-<!-- brackets prior to shipping to link manufacture -->
+<!-- Decide if a reference should be downcased -->
+<xsl:template match="xref" mode="xref-get-lowercase">
+    <xsl:param name="target" />
+    <xsl:param name="text-style" />
+    <xsl:choose>
+        <xsl:when test="$target/self::biblio">
+            <xsl:text>false</xsl:text>
+        </xsl:when>
+        <xsl:when test="@lower">
+            <xsl:value-of select="@lower"/>
+        </xsl:when>
+        <xsl:when test="$text-style = 'phrase-global' or $text-style = 'phrase-hybrid'">
+            <xsl:text>phrase</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>false</xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+<xsl:template name="downcase">
+    <xsl:param name="text"/>
+    <xsl:variable name="smallcase" select="'abcdefghijklmnopqrstuvwxyz'" />
+    <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
+    <xsl:value-of select="translate($text, $uppercase, $smallcase)" />
+</xsl:template>
+
+<!-- Wrapper to downcase if necessary -->
 <xsl:template match="xref" mode="xref-text">
     <xsl:param name="target" />
     <xsl:param name="text-style" />
     <xsl:param name="custom-text" select="''" />
+    <xsl:variable name="lower">
+        <xsl:apply-templates select="." mode="xref-get-lowercase">
+            <xsl:with-param name="target" select="$target" />
+            <xsl:with-param name="text-style" select="$text-style" />
+        </xsl:apply-templates>
+    </xsl:variable>
+    <xsl:variable name="text">
+        <xsl:apply-templates select="." mode="xref-text-nocase">
+            <xsl:with-param name="target" select="$target" />
+            <xsl:with-param name="text-style" select="$text-style" />
+            <xsl:with-param name="custom-text" select="$custom-text" />
+            <xsl:with-param name="lowercase" select="$lower" />
+        </xsl:apply-templates>
+    </xsl:variable>
+    <xsl:choose>
+      <xsl:when test="$lower='true'">
+          <xsl:call-template name="downcase">
+              <xsl:with-param name="text" select="$text"/>
+          </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:value-of select="$text" />
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+<!-- The text that will be visible and clickable    -->
+<!-- Bibliography items return a naked number,      -->
+<!-- caller is responsible for adjusting text with  -->
+<!-- brackets prior to shipping to link manufacture -->
+<xsl:template match="xref" mode="xref-text-nocase">
+    <xsl:param name="target" />
+    <xsl:param name="text-style" />
+    <xsl:param name="custom-text" select="''" />
+    <xsl:param name="lowercase" select="false" />
     <!-- an equation target is exceptional -->
     <xsl:variable name="b-is-equation-target" select="$target/self::mrow or $target/self::men" />
     <!-- a bibliography target is exceptional -->
@@ -5151,7 +5208,19 @@ Neither: A structural node that is simply a (visual) subdivision of a chunk
                 <xsl:otherwise>
                     <!-- type-local first                    -->
                     <!-- for each of the two phrase styles   -->
-                    <xsl:apply-templates select="$target" mode="type-name" />
+                    <xsl:variable name="type-name">
+                        <xsl:apply-templates select="$target" mode="type-name" />
+                    </xsl:variable>
+                    <xsl:choose>
+                          <xsl:when test="$lowercase='phrase'">
+                              <xsl:call-template name="downcase">
+                                  <xsl:with-param name="text" select="$type-name"/>
+                              </xsl:call-template>
+                          </xsl:when>
+                          <xsl:otherwise>
+                              <xsl:value-of select="$type-name"/>
+                          </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:otherwise>
             </xsl:choose>
             <!-- climb up tree to find highest matching structure numbers -->

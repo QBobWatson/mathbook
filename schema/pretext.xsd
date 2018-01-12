@@ -2343,6 +2343,14 @@
       <xs:attribute name="first"/>
       <xs:attribute name="last"/>
       <xs:attribute name="provisional"/>
+      <xs:attribute name="lower">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
       <xs:attribute name="text" type="XrefTextStyle"/>
       <xs:attribute name="detail"/>
     </xs:complexType>

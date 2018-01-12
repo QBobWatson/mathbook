@@ -2558,6 +2558,14 @@
         <attribute name="provisional"/>
       </choice>
       <optional>
+        <attribute name="lower">
+          <choice>
+            <value>true</value>
+            <value>false</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
         <attribute name="text">
           <ref name="XrefTextStyle"/>
         </attribute>
