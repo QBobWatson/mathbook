@@ -659,6 +659,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         <xsl:apply-templates select="credit" />
     </address>
     <xsl:apply-templates select="date" />
+    <xsl:call-template name="cover" />
 </xsl:template>
 
 <!-- A "credit" can have a "title" followed by an author (or several)  -->
