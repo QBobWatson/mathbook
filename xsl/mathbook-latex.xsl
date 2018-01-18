@@ -1761,7 +1761,8 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:text>%% begin: half-title&#xa;</xsl:text>
     <xsl:text>\thispagestyle{empty}&#xa;</xsl:text>
     <xsl:text>{\centering&#xa;</xsl:text>
-    <xsl:text>\vspace*{0.28\textheight}&#xa;</xsl:text>
+    <!-- <xsl:text>\vspace*{0.28\textheight}&#xa;</xsl:text> -->
+    <xsl:text>\null\vskip 0pt plus 1fil&#xa;</xsl:text>
     <xsl:text>{\Huge\bfseries </xsl:text>
     <xsl:apply-templates select="/mathbook/book" mode="title-full"/>
     <xsl:text>}\\</xsl:text> <!-- always end line inside centering -->
@@ -1771,6 +1772,11 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         <xsl:apply-templates select="/mathbook/book" mode="subtitle"/>
         <xsl:text>}\\&#xa;</xsl:text>
     </xsl:if>
+    <xsl:text>&#xa;\vskip 0pt plus .75fil&#xa;</xsl:text>
+    <xsl:text>\includegraphics[width=</xsl:text>
+    <xsl:value-of select="34 * substring-before($font-size, 'pt')" />
+    <xsl:text>pt]{cover.png}&#xa;</xsl:text>
+    <xsl:text>\vskip 0pt plus .2fil&#xa;</xsl:text>
     <xsl:text>}&#xa;</xsl:text> <!-- finish centering -->
     <xsl:text>\clearpage&#xa;</xsl:text>
     <xsl:text>%% end:   half-title&#xa;</xsl:text>
