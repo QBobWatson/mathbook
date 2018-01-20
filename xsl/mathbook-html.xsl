@@ -4304,7 +4304,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <!-- nine combinations: {embed|popout|select} x {default|generic|custom} -->
     <xsl:choose>
         <xsl:when test="@play-at = 'popout'">
-            <a href="{$int-id}.html" target="_blank">
+            <a href="{$int-id}.html" target="_blank" rel="noopener">
             <!-- place a thumbnail as clickable for page already extant -->
                 <xsl:choose>
                     <xsl:when test="@preview = 'generic'">
@@ -4353,7 +4353,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <!-- for the reader-select case, we need a link as a "button" -->
             <xsl:if test="@play-at = 'select'">
                 <div style="text-align: center;">
-                    <a href="{$int-id}.html" target="_blank">
+                    <a href="{$int-id}.html" target="_blank" rel="noopener">
                         <xsl:text>Click to Pop-Out</xsl:text>
                     </a>
                 </div>
@@ -5532,7 +5532,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- automatically verbatim      -->
 <!-- http://stackoverflow.com/questions/9782021/check-for-empty-xml-element-using-xslt -->
 <xsl:template match="url">
-    <a class="external-url" href="{@href}" target="_blank">
+    <a class="external-url" href="{@href}" target="_blank" rel="noopener">
     <xsl:choose>
         <xsl:when test="not(*) and not(normalize-space())">
             <xsl:element name="tt">
@@ -6073,7 +6073,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- A simple page with no constraints -->
 <xsl:template match="demonstration">
     <xsl:variable name="url"><xsl:apply-templates select="." mode="internal-id" />.html</xsl:variable>
-    <a href="{$url}" target="_blank" class="link">
+    <a href="{$url}" target="_blank" class="link" rel="noopener">
         <xsl:apply-templates select="." mode="title-full" />
     </a>
     <xsl:apply-templates select="." mode="simple-file-wrap" >
@@ -7814,7 +7814,7 @@ var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "
 </xsl:variable>
 <noscript>
 <div class="statcounter">
-<a title="web analytics" href="https://statcounter.com/" target="_blank">
+<a title="web analytics" href="https://statcounter.com/" target="_blank" rel="noopener">
 <img class="statcounter" src="{$noscript_url}" alt="web analytics" /></a>
 </div>
 </noscript>
