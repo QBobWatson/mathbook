@@ -6485,6 +6485,7 @@ This is a Java Applet created using GeoGebra from www.geogebra.org - it looks li
             </div>
             <xsl:apply-templates select="/mathbook/docinfo/analytics" />
             <!-- <xsl:call-template name="pytutor-footer" /> -->
+            <xsl:call-template name="combined-js" />
         </xsl:element>
     </html>
     </exsl:document>
@@ -6528,6 +6529,7 @@ This is a Java Applet created using GeoGebra from www.geogebra.org - it looks li
         <body>
             <xsl:copy-of select="$content" />
             <xsl:apply-templates select="/mathbook/docinfo/analytics" />
+            <xsl:call-template name="combined-js" />
         </body>
     </html>
     </exsl:document>
@@ -7761,7 +7763,7 @@ This is a Java Applet created using GeoGebra from www.geogebra.org - it looks li
 <xsl:template name="brand-logo">
     <xsl:choose>
         <xsl:when test="/mathbook/docinfo/brandlogo">
-            <a id="logo-link" href="{/mathbook/docinfo/brandlogo/@url}" target="_blank" >
+            <a id="logo-link" href="{/mathbook/docinfo/brandlogo/@url}" target="_blank" rel="noopener">
                 <img src="{/mathbook/docinfo/brandlogo/@source}" alt="Logo image for document"/>
             </a>
         </xsl:when>
