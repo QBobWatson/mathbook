@@ -2248,6 +2248,11 @@
   <define name="UniqueID">
     <attribute name="xml:id"/>
   </define>
+  <define name="Number">
+    <attribute name="number">
+      <data type="integer"/>
+    </attribute>
+  </define>
   <define name="TypeHandling">
     <optional>
       <attribute name="type-name"/>
@@ -2294,6 +2299,9 @@
     </optional>
     <optional>
       <ref name="XMLLang"/>
+    </optional>
+    <optional>
+      <ref name="Number"/>
     </optional>
     <ref name="Title"/>
     <zeroOrMore>

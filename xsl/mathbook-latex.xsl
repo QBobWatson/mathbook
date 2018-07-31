@@ -2702,6 +2702,11 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </xsl:if>
     <xsl:apply-templates select="." mode="console-typeout" />
     <xsl:apply-templates select="." mode="begin-language" />
+    <xsl:if test="@number">
+      <xsl:apply-templates select="." mode="number-override">
+        <xsl:with-param name="number" select="@number" />
+      </xsl:apply-templates>
+    </xsl:if>
     <!-- Construct the header of the subdivision -->
     <xsl:text>\</xsl:text>
     <xsl:apply-templates select="." mode="subdivision-name" />

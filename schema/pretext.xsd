@@ -2074,6 +2074,9 @@
   <xs:attributeGroup name="UniqueID">
     <xs:attribute ref="xml:id" use="required"/>
   </xs:attributeGroup>
+  <xs:attributeGroup name="Number">
+    <xs:attribute name="number" use="required" type="xs:integer"/>
+  </xs:attributeGroup>
   <xs:attributeGroup name="TypeHandling">
     <xs:attribute name="type-name"/>
     <xs:attribute name="hide-type">
@@ -2112,6 +2115,7 @@
     <xs:attribute ref="xml:id"/>
     <xs:attribute ref="xml:base"/>
     <xs:attribute ref="xml:lang"/>
+    <xs:attribute name="number" type="xs:integer"/>
   </xs:complexType>
   <xs:complexType name="MetaDataSubtitle">
     <xs:sequence>

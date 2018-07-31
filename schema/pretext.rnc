@@ -984,6 +984,8 @@
         
         UniqueID =
             attribute xml:id {text}
+        Number =
+            attribute number {xsd:integer}
         TypeHandling =
             attribute type-name {text}?,
             attribute hide-type {"true"|"false"}?
@@ -1000,6 +1002,7 @@
             UniqueID?,
             XMLBase?,
             XMLLang?,
+            Number?,
             Title,
             Index*
         MetaDataSubtitle =
