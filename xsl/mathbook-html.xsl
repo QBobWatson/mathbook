@@ -1368,7 +1368,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         <!-- collect a knowl filename -->
         <xsl:when test="$block='true'">
             <knowl>
-                <xsl:apply-templates select="." mode="xref-knowl-filename" />
+                <xsl:apply-templates select="." mode="xref-knowl-url" />
             </knowl>
             <typename>
                 <xsl:apply-templates select="." mode="type-name" />
@@ -1503,6 +1503,19 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:text>./knowl/</xsl:text>
     <xsl:apply-templates select="." mode="internal-id" />
     <xsl:text>-hidden.html</xsl:text>
+</xsl:template>
+
+<!-- versioned knowl urls -->
+<xsl:template match="*" mode="xref-knowl-url">
+    <xsl:apply-templates select="." mode="xref-knowl-filename" />
+    <xsl:text>?vers=</xsl:text>
+    <xsl:call-template name="git-hash-short" />
+</xsl:template>
+
+<xsl:template match="*" mode="hidden-knowl-url">
+    <xsl:apply-templates select="." mode="hidden-knowl-filename" />
+    <xsl:text>?vers=</xsl:text>
+    <xsl:call-template name="git-hash-short" />
 </xsl:template>
 
 <!-- Small trick, a cross-reference to an <mrow> of -->
@@ -1739,7 +1752,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <!-- maybe build a 2-parameter template -->
                         <xsl:element name="a">
                             <xsl:attribute name="knowl">
-                                <xsl:apply-templates select="." mode="hidden-knowl-filename" />
+                                <xsl:apply-templates select="." mode="hidden-knowl-url" />
                             </xsl:attribute>
                             <!-- TODO: check if this "knowl-id" is needed, knowl.js implies it is -->
                             <xsl:attribute name="knowl-id">
@@ -1795,7 +1808,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                     <!-- copied from "xref-link" template,  -->
                     <!-- maybe build a 2-parameter template -->
                     <xsl:attribute name="knowl">
-                        <xsl:apply-templates select="." mode="hidden-knowl-filename" />
+                        <xsl:apply-templates select="." mode="hidden-knowl-url" />
                     </xsl:attribute>
                     <!-- TODO: check if this "knowl-id" is needed, knowl.js implies it is -->
                     <xsl:attribute name="knowl-id">
@@ -1815,7 +1828,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <xsl:otherwise>
                     <!-- Point to the file version, which is ineffective -->
                     <xsl:attribute name="knowl">
-                        <xsl:apply-templates select="." mode="xref-knowl-filename" />
+                        <xsl:apply-templates select="." mode="xref-knowl-url" />
                     </xsl:attribute>
                     <!-- empty, indicates content *not* in a file -->
                     <xsl:attribute name="knowl" />
@@ -5135,7 +5148,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <xsl:choose>
                 <xsl:when test="$knowl='true'">
                     <xsl:text>\knowl{</xsl:text>
-                    <xsl:apply-templates select="." mode="xref-knowl-filename" />
+                    <xsl:apply-templates select="." mode="xref-knowl-url" />
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:text>\href{</xsl:text>
@@ -5154,7 +5167,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                     <xsl:when test="$knowl='true'">
                         <!-- build a modern knowl -->
                         <xsl:attribute name="knowl">
-                            <xsl:apply-templates select="." mode="xref-knowl-filename" />
+                            <xsl:apply-templates select="." mode="xref-knowl-url" />
                         </xsl:attribute>
                         <!-- TODO: check if this "knowl-id" is needed, knowl.js implies it is -->
                         <xsl:attribute name="knowl-id">
@@ -6365,7 +6378,7 @@ This is a Java Applet created using GeoGebra from www.geogebra.org - it looks li
         </xsl:attribute>
         <xsl:element name="a">
             <xsl:attribute name="knowl">
-                <xsl:apply-templates select="." mode="xref-knowl-filename" />
+                <xsl:apply-templates select="." mode="xref-knowl-url" />
             </xsl:attribute>
             <!-- make the anchor a target, eg of an in-context link -->
             <xsl:attribute name="id">
