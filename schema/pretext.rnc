@@ -193,8 +193,8 @@
             element preface {
                 MetaDataTitleOptional,
                 (
-                    ((BlockText | SideBySideNoNumber)+, Attribution*) |
-                    ((BlockText | SideBySideNoNumber)*, Contributors, (BlockText | SideBySideNoNumber)*)
+                    ((BlockDivision | Paragraphs)+, Attribution*) |
+                    ((BlockDivision | Paragraphs)*, Contributors, (BlockDivision | Paragraphs)*)
                 )
             }
         

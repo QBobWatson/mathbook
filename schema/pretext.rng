@@ -435,8 +435,8 @@
         <group>
           <oneOrMore>
             <choice>
-              <ref name="BlockText"/>
-              <ref name="SideBySideNoNumber"/>
+              <ref name="BlockDivision"/>
+              <ref name="Paragraphs"/>
             </choice>
           </oneOrMore>
           <zeroOrMore>
@@ -446,15 +446,15 @@
         <group>
           <zeroOrMore>
             <choice>
-              <ref name="BlockText"/>
-              <ref name="SideBySideNoNumber"/>
+              <ref name="BlockDivision"/>
+              <ref name="Paragraphs"/>
             </choice>
           </zeroOrMore>
           <ref name="Contributors"/>
           <zeroOrMore>
             <choice>
-              <ref name="BlockText"/>
-              <ref name="SideBySideNoNumber"/>
+              <ref name="BlockDivision"/>
+              <ref name="Paragraphs"/>
             </choice>
           </zeroOrMore>
         </group>
