@@ -1,0 +1,13 @@
+# -*- python -*-
+
+env = Environment()
+
+env.Command('pretext.rnc',
+            ['../xsl/mathbook-litprog.xsl', 'pretext.xml'],
+            'xsltproc $SOURCES && mv pretext.rnc $TARGET')
+
+env.Command('pretext.rng', 'pretext.rnc',
+            'trang -I rnc -O rng $SOURCE $TARGET')
+
+env.Command('pretext.xsd', 'pretext.rnc',
+            'trang -o disable-abstract-elements -I rnc -O xsd $SOURCE $TARGET')
