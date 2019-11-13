@@ -1748,6 +1748,9 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:apply-templates select="." mode="birth-element" />
                     </xsl:variable>
                     <xsl:element name="{$birth-elt}">
+                        <xsl:attribute name="class">
+                            <xsl:text>hidden-knowl-wrapper</xsl:text>
+                        </xsl:attribute>
                         <!-- copied from "xref-link" template,  -->
                         <!-- maybe build a 2-parameter template -->
                         <xsl:element name="a">
