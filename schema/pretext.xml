@@ -1784,7 +1784,7 @@
                     element holder {text},
                     element minilicense {TextShort}?,
                     element shortlicense {TextLong}?
-                }?
+                }*
             }
         Biography =
             element biography {
