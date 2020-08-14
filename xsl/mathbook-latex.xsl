@@ -1842,6 +1842,11 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 
 <xsl:template match="author|editor" mode="title-page">
     <xsl:text>[3\baselineskip]&#xa;</xsl:text>
+    <xsl:if test="contributortype">
+        <xsl:text>\textit{\large </xsl:text>
+        <xsl:apply-templates select="contributortype" />
+        <xsl:text>}\\[.3\baselineskip]&#xa;</xsl:text>
+    </xsl:if>
     <xsl:text>{\Large </xsl:text>
     <xsl:apply-templates select="personname" />
     <xsl:if test="self::editor">

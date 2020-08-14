@@ -361,7 +361,11 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 
 <!-- Authors and editors with affiliations (eg, on title page) -->
 <xsl:template match="author|editor" mode="full-info">
-    <p>
+  <p>
+        <xsl:if test="contributortype">
+          <i><xsl:apply-templates select="contributortype" /></i>
+          <br />
+        </xsl:if>
         <xsl:apply-templates select="personname" />
         <xsl:if test="self::editor">
             <xsl:text>, </xsl:text>
