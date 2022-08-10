@@ -1,6 +1,8 @@
 # -*- python -*-
 
-env = Environment()
+import os
+
+env = Environment(ENV=os.environ)
 
 env.Command('pretext.rnc',
             ['../xsl/mathbook-litprog.xsl', 'pretext.xml'],
