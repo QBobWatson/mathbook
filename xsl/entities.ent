@@ -49,8 +49,8 @@
 <!-- and "backmatter" as peers of content elements, and in  -->
 <!-- other cases it should not be a problem                 -->
 <!-- Typical use:  *[not(&SUBDIVISION-METADATA-FILTER;)]    -->
-<!ENTITY SUBDIVISION-METADATA "title|subtitle|index|notation|todo|frontmatter|backmatter">
-<!ENTITY SUBDIVISION-METADATA-FILTER "self::title or self::subtitle or self::idx or self::index[not(index-list)] or self::notation or self::todo or self::frontmatter or self::backmatter">
+<!ENTITY SUBDIVISION-METADATA "title|subtitle|index|notation|concept|todo|frontmatter|backmatter">
+<!ENTITY SUBDIVISION-METADATA-FILTER "self::title or self::subtitle or self::idx or self::index[not(index-list)] or self::notation or self::concept or self::todo or self::frontmatter or self::backmatter">
 
 <!-- To implement a new category of blocks, search on    -->
 <!-- "PROJECT-" (case-sensitive) since we will mark      -->

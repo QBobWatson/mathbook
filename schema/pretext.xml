@@ -133,7 +133,7 @@
             element appendix {
                 MetaDataTitle,
                 (
-                    (BlockDivision | Paragraphs | NotationList | SolutionList )+ |
+                    (BlockDivision | Paragraphs | NotationList | ConceptLibrary | SolutionList )+ |
                     (
                         IntroductionDivision?,
                         (
@@ -265,6 +265,7 @@
             List |
             Footnote |
             Notation |
+            Concept |
             Index)* }
         Paragraph =
             element p {
@@ -284,6 +285,7 @@
             ListWW |
             Footnote |
             Notation |
+            Concept |
             Index)* }
         ParagraphWW =
             element p {
@@ -697,6 +699,7 @@
                     TextShort
                 }
             }
+        Concept = element concept {text}
         </fragment>
 
         <p>Footnotes are especially dangerous.  They should contain quite a bit of content, and should be targets of cross-references.  So the content is not as expansive as a regular paragraph, which is possibly too restrictive.</p>
@@ -1666,27 +1669,31 @@
             XMLLang?,
             Number?,
             Title,
-            Index*
+            Index*,
+            Concept*
         MetaDataSubtitle =
             UniqueID?,
             XMLBase?,
             XMLLang?,
             Title,
             Subtitle?,
-            Index*
+            Index*,
+            Concept*
         MetaDataTitleOptional =
             UniqueID?,
             XMLBase?,
             XMLLang?,
             Title?,
-            Index*
+            Index*,
+            Concept*
         MetaDataCaption =
             UniqueID?,
             XMLBase?,
             XMLLang?,
             Title?,
             Caption,
-            Index*
+            Index*,
+            Concept*
         </fragment>
 
     </section>
@@ -1720,6 +1727,8 @@
             element notation-list {empty}
         SolutionList =
             element solution-list {empty}
+        ConceptLibrary =
+            element notation-list {empty}
         </fragment>
     </section>
 
