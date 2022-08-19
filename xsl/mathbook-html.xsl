@@ -1806,6 +1806,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         <xsl:attribute name="class">
             <xsl:text>hidden-knowl-wrapper</xsl:text>
         </xsl:attribute>
+        <xsl:apply-templates select="." mode="concept" />
         <xsl:element name="a">
             <xsl:choose>
                 <!-- Hack: WW not working from embedded knowls,     -->
@@ -2506,6 +2507,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         </xsl:if>
         <!-- If visible, heading interior to article -->
         <xsl:if test="$block-type = 'visible'">
+          <xsl:apply-templates select="." mode="concept" />
             <xsl:apply-templates select="." mode="heading-birth" />
         </xsl:if>
         <!-- If xref-knowl, heading interior to article -->

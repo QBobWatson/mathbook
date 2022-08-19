@@ -265,7 +265,6 @@
             List |
             Footnote |
             Notation |
-            Concept |
             Index)* }
         Paragraph =
             element p {
@@ -285,7 +284,6 @@
             ListWW |
             Footnote |
             Notation |
-            Concept |
             Index)* }
         ParagraphWW =
             element p {
@@ -699,7 +697,6 @@
                     TextShort
                 }
             }
-        Concept = element concept {text}
         </fragment>
 
         <p>Footnotes are especially dangerous.  They should contain quite a bit of content, and should be targets of cross-references.  So the content is not as expansive as a regular paragraph, which is possibly too restrictive.</p>
@@ -742,6 +739,21 @@
                 )
             }
         IndexList = element index-list {empty}
+        </fragment>
+
+        <fragment xml:id="concept-library">
+        Concept = element concept {
+                attribute tag {text}
+            }
+        ConceptEntry = element concept {
+                attribute tag {text},
+                element desc { TextShort },
+                element see {attribute tag {text}}*
+            }
+        ConceptLibrary =
+            element concept-library {
+                ConceptEntry+
+            }
         </fragment>
 
     </section>
@@ -1727,8 +1739,6 @@
             element notation-list {empty}
         SolutionList =
             element solution-list {empty}
-        ConceptLibrary =
-            element notation-list {empty}
         </fragment>
     </section>
 
@@ -2030,6 +2040,7 @@
         <fragment ref="universal" />
         <fragment ref="block" />
         <fragment ref="block-component" />
+        <fragment ref="concept-library" />
         <fragment ref="objectives" />
         <fragment ref="blockquote" />
         <fragment ref="verbatimdisplay" />
