@@ -1950,14 +1950,14 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- and so should not be within an HTML paragraph.     -->
 <!-- We bust them out, and put the id for the paragraph -->
 <!-- on the first one, even if empty.                   -->
-<xsl:template match="p[ol|ul|dl|me|men|md|mdn|latex-code]" mode="body">
+<xsl:template match="p[ol|ul|dl|me|men|md|mdn|latex-code[not(@mode='bare')]]" mode="body">
     <xsl:param name="block-type" />
     <xsl:param name="b-original" select="true()" />
     <xsl:if test="$block-type = 'xref'">
         <xsl:apply-templates select="." mode="heading-xref-knowl" />
     </xsl:if>
     <!-- will later loop over displays within paragraph -->
-    <xsl:variable name="displays" select="ul|ol|dl|me|men|md|mdn|latex-code" />
+    <xsl:variable name="displays" select="ul|ol|dl|me|men|md|mdn|latex-code[not(@mode='bare')]" />
     <!-- all interesting nodes of paragraph, before first display -->
     <xsl:variable name="initial" select="$displays[1]/preceding-sibling::node()[self::* or self::text()]" />
     <!-- content prior to first display is exceptional  -->
@@ -1984,7 +1984,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         </xsl:apply-templates>
         <!-- look through remainder, all element and text nodes, and the next display -->
         <xsl:variable name="rightward" select="following-sibling::node()[self::* or self::text()]" />
-        <xsl:variable name="next-display" select="following-sibling::*[self::ul or self::ol or self::dl or self::me or self::men or self::md or self::mdn or self::latex-code][1]" />
+        <xsl:variable name="next-display" select="following-sibling::*[self::ul or self::ol or self::dl or self::me or self::men or self::md or self::mdn or self::latex-code[not(@mode='bare')]][1]" />
         <xsl:choose>
             <xsl:when test="$next-display">
                 <xsl:variable name="leftward" select="$next-display/preceding-sibling::node()[self::* or self::text()]" />
@@ -2743,9 +2743,9 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <!-- create posterior for appendages                  -->
     <!-- could condition on block too, rather than schema -->
     <!-- exercises have selectors, activities do not, think how to refactor this -->
-    <xsl:if test="(hint|answer|solution and not(self::exercise) and not(&PROJECT-FILTER;) and not(self::task)) or proof or note">
+    <xsl:if test="(hint|answer|solution and not(self::exercise) and not(&PROJECT-FILTER;) and not(self::task)) or proof">
         <div class="posterior">
-            <xsl:apply-templates select="hint|answer|solution|proof|note">
+            <xsl:apply-templates select="hint|answer|solution|proof">
                 <xsl:with-param name="b-original" select="$b-original" />
             </xsl:apply-templates>
         </div>
