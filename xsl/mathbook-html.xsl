@@ -2743,7 +2743,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <!-- create posterior for appendages                  -->
     <!-- could condition on block too, rather than schema -->
     <!-- exercises have selectors, activities do not, think how to refactor this -->
-    <xsl:if test="(hint|answer|solution and not(self::exercise) and not(&PROJECT-FILTER;) and not(self::task)) or proof">
+    <xsl:if test="(hint|answer|solution and not(self::exercise) and not(&PROJECT-FILTER;) and not(self::task)) or (proof and not(self::paragraphs))">
         <div class="posterior">
             <xsl:apply-templates select="hint|answer|solution|proof">
                 <xsl:with-param name="b-original" select="$b-original" />
